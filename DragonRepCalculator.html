@@ -1,0 +1,850 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Great Dragon Reputation Calculator</title>
+    <!-- This calculator is made by DragonAxe for the game War of Dragons.  
+         Anybody is welcome to copy and use it but please leave this line in. -->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-darkness/jquery-ui.css" type="text/css" media="all" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://files1.guildlaunch.net/guild/library/278154/jquery.cookie.js"></script>
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function() {
+            $("#currentrep").keydown(function(event) {
+                // Allow only backspace and delete
+                if (event.keyCode == 46 || event.keyCode == 8) {
+                }
+                else {
+                    // Ensure that it is a number and stop the keypress
+                    if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+                        event.preventDefault();
+                    }
+                }
+            });
+            $("#onHandBlood").keydown(function(event) {
+                // Allow only backspace and delete
+                if (event.keyCode == 46 || event.keyCode == 8) {
+                    // let it happen, don't do anything
+                }
+                else {
+                    // Ensure that it is a number and stop the keypress
+                    if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+                        event.preventDefault();
+                    }
+                }
+            });
+            $("#onHandGrass").keydown(function(event) {
+                // Allow only backspace and delete
+                if (event.keyCode == 46 || event.keyCode == 8) {
+                    // let it happen, don't do anything
+                }
+                else {
+                    // Ensure that it is a number and stop the keypress
+                    if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+                        event.preventDefault();
+                    }
+                }
+            });
+            $("#onHandStone").keydown(function(event) {
+                // Allow only backspace and delete
+                if (event.keyCode == 46 || event.keyCode == 8) {
+                    // let it happen, don't do anything
+                }
+                else {
+                    // Ensure that it is a number and stop the keypress
+                    if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+                        event.preventDefault();
+                    }
+                }
+            });
+            $("#onHandAzure").keydown(function(event) {
+                // Allow only backspace and delete
+                if (event.keyCode == 46 || event.keyCode == 8) {
+                    // let it happen, don't do anything
+                }
+                else {
+                    // Ensure that it is a number and stop the keypress
+                    if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+                        event.preventDefault();
+                    }
+                }
+            });
+            $("#onHandSkull").keydown(function(event) {
+                // Allow only backspace and delete
+                if (event.keyCode == 46 || event.keyCode == 8) {
+                    // let it happen, don't do anything
+                }
+                else {
+                    // Ensure that it is a number and stop the keypress
+                    if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+                        event.preventDefault();
+                    }
+                }
+            });
+            $("#onHandStriped").keydown(function(event) {
+                // Allow only backspace and delete
+                if (event.keyCode == 46 || event.keyCode == 8) {
+                    // let it happen, don't do anything
+                }
+                else {
+                    // Ensure that it is a number and stop the keypress
+                    if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+                        event.preventDefault();
+                    }
+                }
+            });
+            $("#onHandIdalle").keydown(function(event) {
+                // Allow only backspace and delete
+                if (event.keyCode == 46 || event.keyCode == 8) {
+                    // let it happen, don't do anything
+                }
+                else {
+                    // Ensure that it is a number and stop the keypress
+                    if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+                        event.preventDefault();
+                    }
+                }
+            });
+            $("#currentrep").change(function() {
+                calculateRes();
+            });
+            $("#onHandBlood").change(function() {
+                calculateRes();
+            });
+            $("#onHandGrass").change(function() {
+                calculateRes();
+            });
+            $("#onHandStone").change(function() {
+                calculateRes();
+            });
+            $("#onHandAzure").change(function() {
+                calculateRes();
+            });
+            $("#onHandSkull").change(function() {
+                calculateRes();
+            });
+            $("#onHandStriped").change(function() {
+                calculateRes();
+            });
+            $("#onHandIdalle").change(function() {
+                calculateRes();
+            });
+            $("#savebutton").button();
+            $("#savebutton").click(function() {
+                var currentrep = Number($("#currentrep").val());
+                var onHandBlood = Number($("#onHandBlood").val());
+                var onHandGrass = Number($("#onHandGrass").val());
+                var onHandStone = Number($("#onHandStone").val());
+                var onHandAzure = Number($("#onHandAzure").val());
+                var onHandSkull = Number($("#onHandSkull").val());
+                var onHandStriped = Number($("#onHandStriped").val());
+                var onHandIdalle = Number($("#onHandIdalle").val());
+                $.cookie('DragonCalculatorRep', currentrep, { expires: 999 });
+                $.cookie('DragonCalculatorBlood', onHandBlood, { expires: 999 });
+                $.cookie('DragonCalculatorGrass', onHandGrass, { expires: 999 });
+                $.cookie('DragonCalculatorStone', onHandStone, { expires: 999 });
+                $.cookie('DragonCalculatorAzure', onHandAzure, { expires: 999 });
+                $.cookie('DragonCalculatorSkull', onHandSkull, { expires: 999 });
+                $.cookie('DragonCalculatorStriped', onHandStriped, { expires: 999 });
+                $.cookie('DragonCalculatorIdalle', onHandIdalle, { expires: 999 });
+            });
+            $("#currentrep").val($.cookie('DragonCalculatorRep'));
+            $("#onHandBlood").val($.cookie('DragonCalculatorBlood'));
+            $("#onHandGrass").val($.cookie('DragonCalculatorGrass'));
+            $("#onHandStone").val($.cookie('DragonCalculatorStone'));
+            $("#onHandAzure").val($.cookie('DragonCalculatorAzure'));
+            $("#onHandSkull").val($.cookie('DragonCalculatorSkull'));
+            $("#onHandStriped").val($.cookie('DragonCalculatorStriped'));
+            $("#onHandIdalle").val($.cookie('DragonCalculatorIdalle'));
+            calculateRes();
+        });
+        function calculateRes() {
+
+            var currentrep = Number($("#currentrep").val());
+            var onHandBlood = Number($("#onHandBlood").val());
+            var onHandGrass = Number($("#onHandGrass").val());
+            var onHandStone = Number($("#onHandStone").val());
+            var onHandAzure = Number($("#onHandAzure").val());
+            var onHandSkull = Number($("#onHandSkull").val());
+            var onHandStriped = Number($("#onHandStriped").val());
+            var onHandIdalle = Number($("#onHandIdalle").val());
+            var bloodCount = 219;
+            var grassCount = 123;
+            var stoneCount = 526;
+            var azureCount = 200;
+            var skullCount = 200;
+            var stripedCount = 12;
+            var idalleCount = 10;
+            var bloodLeft = onHandBlood;
+            var grassLeft = onHandGrass;
+            var stoneLeft = onHandStone;
+            var azureLeft = onHandAzure;
+            var skullLeft = onHandSkull;
+            var stripedLeft = onHandStriped;
+            var IdalleLeft = onHandIdalle;
+
+            //Gray Badge Calculations
+            if (currentrep >= 500) {
+                var grayBlood = 0;
+                var grayGrass = 0;
+                var grayStone = 0;
+                var grayAzure = 0;
+                var graySkull = 0;
+                var grayStriped = 0;
+                var grayIdalle = 0;
+            }
+            else {
+                var repcount = (500 - currentrep) / 50;
+                bloodNeeded = repcount * bloodCount;
+                if (bloodNeeded >= onHandBlood) {
+                    var grayBlood = bloodNeeded - onHandBlood;
+                    var bloodLeft =  0;
+                }
+                else {
+                    var grayBlood = 0;
+                    var bloodLeft = onHandBlood - bloodNeeded;
+                }
+
+                grassNeeded = repcount * grassCount;
+                if (grassNeeded >= onHandGrass) {
+                    var grayGrass = grassNeeded - onHandGrass;
+                    var grassLeft = 0;
+                }
+                else {
+                    var grayGrass = 0;
+                    var grassLeft = onHandGrass - grassNeeded;
+                }
+
+                stoneNeeded = repcount * stoneCount;
+                if (stoneNeeded >= onHandStone) {
+                    var grayStone = stoneNeeded - onHandStone;
+                    var stoneLeft = 0;
+                }
+                else {
+                    var grayStone = 0;
+                    var stoneLeft = onHandStone - stoneNeeded;
+                }
+
+                azureNeeded = repcount * azureCount;
+                if (azureNeeded >= onHandAzure) {
+                    var grayAzure = azureNeeded - onHandAzure;
+                    var azureLeft = 0;
+                }
+                else {
+                    var grayAzure = 0;
+                    var azureLeft = onHandAzure - azureNeeded;
+                }
+
+                skullNeeded = repcount * skullCount;
+                if (skullNeeded >= onHandSkull) {
+                    var graySkull = skullNeeded - onHandSkull;
+                    var skullLeft = 0;
+                }
+                else {
+                    var graySkull = 0;
+                    var skullLeft = onHandSkull - skullNeeded;
+                }
+
+                stripedNeeded = repcount * stripedCount;
+                if (stripedNeeded >= onHandStriped) {
+                    var grayStriped = stripedNeeded - onHandStriped;
+                    var stripedLeft = 0;
+                }
+                else {
+                    var grayStriped = 0;
+                    var stripedLeft = onHandStriped - stripedNeeded;
+                }
+
+                idalleNeeded = repcount * idalleCount;
+                if (idalleNeeded >= onHandIdalle) {
+                    var grayIdalle = idalleNeeded - onHandIdalle;
+                    var IdalleLeft = 0;
+                }
+                else {
+                    var grayIdalle = 0;
+                    var IdalleLeft = onHandIdalle - idalleNeeded;
+                }
+            }
+
+            $("#grayBlood").html(grayBlood);
+            $("#grayGrass").html(grayGrass);
+            $("#grayStone").html(grayStone);
+            $("#grayAzure").html(grayAzure);
+            $("#graySkull").html(graySkull);
+            $("#grayStriped").html(grayStriped);
+            $("#grayIdalle").html(grayIdalle);
+
+            //Green Badge Calculations
+            if (currentrep >= 1000) {
+                var greenBlood = 0;
+                var greenGrass = 0;
+                var greenStone = 0;
+                var greenAzure = 0;
+                var greenSkull = 0;
+                var greenStriped = 0;
+                var greenIdalle = 0;
+            }
+            else {
+                if (currentrep <= 500) {
+                    repcount = 10;
+                } 
+                else {
+                    repcount = (1000 - currentrep)/50;
+                }
+                    
+                bloodNeeded = repcount * bloodCount;
+                if (bloodNeeded >= bloodLeft) {
+                    var greenBlood = bloodNeeded - bloodLeft + grayBlood;
+                    var bloodLeft = 0;
+                }
+                else {
+                    var greenBlood = 0;
+                    var bloodLeft = bloodLeft - bloodNeeded;
+                }
+
+                grassNeeded = repcount * grassCount;
+                if (grassNeeded >= grassLeft) {
+                    var greenGrass = grassNeeded - grassLeft + grayGrass;
+                    var grassLeft = 0;
+                }
+                else {
+                    var greenGrass = 0;
+                    var grassLeft = grassLeft - grassNeeded;
+                }
+
+                stoneNeeded = repcount * stoneCount;
+                if (stoneNeeded >= stoneLeft) {
+                    var greenStone = stoneNeeded - stoneLeft + grayStone;
+                    var stoneLeft = 0;
+                }
+                else {
+                    var greenStone = 0;
+                    var stoneLeft = stoneLeft - stoneNeeded;
+                }
+
+                azureNeeded = repcount * azureCount;
+                if (azureNeeded >= azureLeft) {
+                    var greenAzure = azureNeeded - azureLeft + grayAzure;
+                    var azureLeft = 0;
+                }
+                else {
+                    var greenAzure = 0;
+                    var azureLeft = azureLeft - azureNeeded;
+                }
+
+                skullNeeded = repcount * skullCount;
+                if (skullNeeded >= skullLeft) {
+                    var greenSkull = skullNeeded - skullLeft + graySkull;
+                    var skullLeft = 0;
+                }
+                else {
+                    var greenSkull = 0;
+                    var skullLeft = skullLeft - skullNeeded;
+                }
+
+                stripedNeeded = repcount * stripedCount;
+                if (stripedNeeded >= stripedLeft) {
+                    var greenStriped = stripedNeeded - stripedLeft + grayStriped;
+                    var stripedLeft = 0;
+                }
+                else {
+                    var greenStriped = 0;
+                    var stripedLeft = stripedLeft - stripedNeeded;
+                }
+
+                idalleNeeded = repcount * idalleCount;
+                if (idalleNeeded >= IdalleLeft) {
+                    var greenIdalle = idalleNeeded - IdalleLeft + grayIdalle;
+                    var IdalleLeft = 0;
+                }
+                else {
+                    var greenIdalle = 0;
+                    var IdalleLeft = IdalleLeft - idalleNeeded;
+                }
+            }
+
+            $("#greenBlood").html(greenBlood);
+            $("#greenGrass").html(greenGrass);
+            $("#greenStone").html(greenStone);
+            $("#greenAzure").html(greenAzure);
+            $("#greenSkull").html(greenSkull);
+            $("#greenStriped").html(greenStriped);
+            $("#greenIdalle").html(greenIdalle);
+
+            //blue Badge Calculations
+            if (currentrep >= 2000) {
+                var blueBlood = 0;
+                var blueGrass = 0;
+                var blueStone = 0;
+                var blueAzure = 0;
+                var blueSkull = 0;
+                var blueStriped = 0;
+                var blueIdalle = 0;
+            }
+            else {
+                if (currentrep <= 1000) {
+                    repcount = 20;
+                }
+                else {
+                    repcount = (2000 - currentrep) / 50;
+                }
+
+                bloodNeeded = repcount * bloodCount;
+                if (bloodNeeded >= bloodLeft) {
+                    var blueBlood = bloodNeeded - bloodLeft + greenBlood;
+                    var bloodLeft = 0;
+                }
+                else {
+                    var blueBlood = 0;
+                    var bloodLeft = bloodLeft - bloodNeeded;
+                }
+
+                grassNeeded = repcount * grassCount;
+                if (grassNeeded >= grassLeft) {
+                    var blueGrass = grassNeeded - grassLeft + greenGrass;
+                    var grassLeft = 0;
+                }
+                else {
+                    var blueGrass = 0;
+                    var grassLeft = grassLeft - grassNeeded;
+                }
+
+                stoneNeeded = repcount * stoneCount;
+                if (stoneNeeded >= stoneLeft) {
+                    var blueStone = stoneNeeded - stoneLeft + greenStone;
+                    var stoneLeft = 0;
+                }
+                else {
+                    var blueStone = 0;
+                    var stoneLeft = stoneLeft - stoneNeeded;
+                }
+
+                azureNeeded = repcount * azureCount;
+                if (azureNeeded >= azureLeft) {
+                    var blueAzure = azureNeeded - azureLeft + greenAzure;
+                    var azureLeft = 0;
+                }
+                else {
+                    var blueAzure = 0;
+                    var azureLeft = azureLeft - azureNeeded;
+                }
+
+                skullNeeded = repcount * skullCount;
+                if (skullNeeded >= skullLeft) {
+                    var blueSkull = skullNeeded - skullLeft + greenSkull;
+                    var skullLeft = 0;
+                }
+                else {
+                    var blueSkull = 0;
+                    var skullLeft = skullLeft - skullNeeded;
+                }
+
+                stripedNeeded = repcount * stripedCount;
+                if (stripedNeeded >= stripedLeft) {
+                    var blueStriped = stripedNeeded - stripedLeft + greenStriped;
+                    var stripedLeft = 0;
+                }
+                else {
+                    var blueStriped = 0;
+                    var stripedLeft = stripedLeft - stripedNeeded;
+                }
+
+                idalleNeeded = repcount * idalleCount;
+                if (idalleNeeded >= IdalleLeft) {
+                    var blueIdalle = idalleNeeded - IdalleLeft + greenIdalle;
+                    var IdalleLeft = 0;
+                }
+                else {
+                    var blueIdalle = 0;
+                    var IdalleLeft = IdalleLeft - idalleNeeded;
+                }
+            }
+
+            $("#blueBlood").html(blueBlood);
+            $("#blueGrass").html(blueGrass);
+            $("#blueStone").html(blueStone);
+            $("#blueAzure").html(blueAzure);
+            $("#blueSkull").html(blueSkull);
+            $("#blueStriped").html(blueStriped);
+            $("#blueIdalle").html(blueIdalle);
+
+            //Purple Badge Calculations
+            if (currentrep >= 3000) {
+                var purpleBlood = 0;
+                var purpleGrass = 0;
+                var purpleStone = 0;
+                var purpleAzure = 0;
+                var purpleSkull = 0;
+                var purpleStriped = 0;
+                var purpleIdalle = 0;
+            }
+            else {
+                if (currentrep <= 2000) {
+                    repcount = 20;
+                }
+                else {
+                    repcount = (3000 - currentrep) / 50;
+                }
+
+                bloodNeeded = repcount * bloodCount;
+                if (bloodNeeded >= bloodLeft) {
+                    var purpleBlood = bloodNeeded - bloodLeft + blueBlood;
+                    var bloodLeft = 0;
+                }
+                else {
+                    var purpleBlood = 0;
+                    var bloodLeft = bloodLeft - bloodNeeded;
+                }
+
+                grassNeeded = repcount * grassCount;
+                if (grassNeeded >= grassLeft) {
+                    var purpleGrass = grassNeeded - grassLeft + blueGrass;
+                    var grassLeft = 0;
+                }
+                else {
+                    var purpleGrass = 0;
+                    var grassLeft = grassLeft - grassNeeded;
+                }
+
+                stoneNeeded = repcount * stoneCount;
+                if (stoneNeeded >= stoneLeft) {
+                    var purpleStone = stoneNeeded - stoneLeft + blueStone;
+                    var stoneLeft = 0;
+                }
+                else {
+                    var purpleStone = 0;
+                    var stoneLeft = stoneLeft - stoneNeeded;
+                }
+
+                azureNeeded = repcount * azureCount;
+                if (azureNeeded >= azureLeft) {
+                    var purpleAzure = azureNeeded - azureLeft + blueAzure;
+                    var azureLeft = 0;
+                }
+                else {
+                    var purpleAzure = 0;
+                    var azureLeft = azureLeft - azureNeeded;
+                }
+
+                skullNeeded = repcount * skullCount;
+                if (skullNeeded >= skullLeft) {
+                    var purpleSkull = skullNeeded - skullLeft + blueSkull;
+                    var skullLeft = 0;
+                }
+                else {
+                    var purpleSkull = 0;
+                    var skullLeft = skullLeft - skullNeeded;
+                }
+
+                stripedNeeded = repcount * stripedCount;
+                if (stripedNeeded >= stripedLeft) {
+                    var purpleStriped = stripedNeeded - stripedLeft + blueStriped;
+                    var stripedLeft = 0;
+                }
+                else {
+                    var purpleStriped = 0;
+                    var stripedLeft = stripedLeft - stripedNeeded;
+                }
+
+                idalleNeeded = repcount * idalleCount;
+                if (idalleNeeded >= IdalleLeft) {
+                    var purpleIdalle = idalleNeeded - IdalleLeft + blueIdalle;
+                    var IdalleLeft = 0;
+                }
+                else {
+                    var purpleIdalle = 0;
+                    var IdalleLeft = IdalleLeft - idalleNeeded;
+                }
+            }
+
+            $("#purpleBlood").html(purpleBlood);
+            $("#purpleGrass").html(purpleGrass);
+            $("#purpleStone").html(purpleStone);
+            $("#purpleAzure").html(purpleAzure);
+            $("#purpleSkull").html(purpleSkull);
+            $("#purpleStriped").html(purpleStriped);
+            $("#purpleIdalle").html(purpleIdalle);
+
+            //Red Badge Calculations
+            bloodNeeded = 3286;
+            if (bloodNeeded >= bloodLeft) {
+                var redBlood = bloodNeeded - bloodLeft + purpleBlood;
+            }
+            else {
+                var redBlood = 0;
+            }
+
+            grassNeeded = 1845;
+            if (grassNeeded >= grassLeft) {
+                var redGrass = grassNeeded - grassLeft + purpleGrass;
+            }
+            else {
+                var redGrass = 0;
+            }
+
+            stoneNeeded = 7890;
+            if (stoneNeeded >= stoneLeft) {
+                var redStone = stoneNeeded - stoneLeft + purpleStone;
+            }
+            else {
+                var redStone = 0;
+            }
+
+            $("#redBlood").html(redBlood);
+            $("#redGrass").html(redGrass);
+            $("#redStone").html(redStone);
+            
+            $("#dragonBloodDustNeeded").html(redStone);
+            $("#dragonBloodNeeded").html(redStone / 2);
+            $("#teethNeeded").html(redStone);
+            $("#mallNeeded").html(redGrass);
+            $("#fieryNeeded").html(redGrass * 2);
+            $("#demonClawNeeded").html(redGrass * 4);
+        }         
+    </script>
+    <style type="text/css">
+        body 
+        {
+            color : White;
+            background : Black;
+            font-family : Calibri;
+            font-size: 10pt;
+        }
+        a 
+        {
+            color : White;
+            background : Black;
+            font-family : Calibri;
+        }
+        .tb
+        {
+            background-image : url('http://www.warofdragons.com/images/tbl-usi_bg.gif');
+            color : Black;
+            border-width : medium;
+            text-align : center;
+            width : 830px;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td align="center">
+                <table border="1" class="tb">
+                    <tbody>
+                        <tr>
+                            <td><img height="100px" width="100px" src="http://www.warofdragons.com/images/data/npcs/dragon_white.jpg"></td>
+                            <td colspan="2"><h1>Great Dragon<br>Reputation Calculator</h1></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <table border="1" class="tb">
+                    <tbody>
+                        <tr>
+                            <td align="right"><b>Current Reputation:</b></td>
+                            <td colspan="2"><input style="width:400px" type="text" id="currentrep"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table border="1" cellpadding="5" class="tb">
+                    <tbody>
+                        <tr>
+                            <td colspan="8" style="font-weight:bolder; font-size:larger; color:White; background-color:#222222">Offerings</td>
+                            <td rowspan="15" style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#222222">To Make</td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#222222">&nbsp;</td>
+                            <td colspan="2" style="font-weight:bolder; font-size:larger; color:White; background-color:#222222">You Need</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><img height="50px" width="50px" src="http://w1.dwar.ru/images/data/artifacts/res_krov_drakona.gif"></td>
+                            <td><img height="50px" width="50px" src="http://w1.dwar.ru/images/data/artifacts/ingr_purpur_ink.gif"></td>
+                            <td><img height="50px" width="50px" src="http://w1.dwar.ru/images/data/artifacts/res_perlamutr.gif"></td>
+                            <td><img height="50px" width="50px" src="http://w1.dwar.ru/images/data/artifacts/res_jar-tsvet.gif"></td>
+                            <td><img height="50px" width="50px" src="http://w1.dwar.ru/images/data/artifacts/res_vkusnocvet.gif"></td>
+                            <td><img height="50px" width="50px" src="http://w1.dwar.ru/images/data/artifacts/kristallugol_blue2310.gif"></td>
+                            <td><img height="50px" width="50px" src="http://w1.dwar.ru/images/data/artifacts/bojestchastica_091207.gif"></td>
+                            <td><img height="50px" width="50px" src="http://w1.dwar.ru/images/data/artifacts/ingr_purpur_ink.gif"></td>
+                            <td>=</td>
+                            <td><img height="50px" width="50px" src="http://www.warofdragons.com/images/data/artifacts/res_hrust_osetr.gif"></td>
+                            <td><img height="50px" width="50px" src="http://www.warofdragons.com/images/data/artifacts/magicteeth_081112.gif"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td style="font-weight: bold">Dragon Blood</td>
+                            <td style="font-weight: bold">Magic Purple Ink</td>
+                            <td style="font-weight: bold">Liquid Nacre</td>
+                            <td style="font-weight: bold">Heat Flower</td>
+                            <td style="font-weight: bold">Licious Flower</td>
+                            <td style="font-weight: bold">Crystalline Coal</td>
+                            <td style="font-weight: bold">Idalle</td>
+                            <td style="font-weight: bold">Magic Purple Ink</td>
+                            <td>=</td>
+                            <td style="font-weight: bold">Crystal Sturgeon</td>
+                            <td style="font-weight: bold">Enchanted Teeth</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>22</td>
+                            <td>12</td>
+                            <td>53</td>
+                            <td>20</td>
+                            <td>20</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td><div id="mallNeeded">0</div></td>
+                            <td>=</td>
+                            <td><div id="fieryNeeded">0</div></td>
+                            <td><div id="demonClawNeeded">0</div></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>110</td>
+                            <td>62</td>
+                            <td>263</td>
+                            <td>100</td>
+                            <td>100</td>
+                            <td>6</td>
+                            <td>5</td>
+                            <td colspan="4" style="font-weight:bolder; font-size:larger; color:White; background-color:#222222">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>Guaranteed Recognition</td>
+                            <td>219</td>
+                            <td>123</td>
+                            <td>526</td>
+                            <td>200</td>
+                            <td>200</td>
+                            <td>12</td>
+                            <td>10</td>
+                            <td><img height="50px" width="50px" src="http://w1.dwar.ru/images/data/artifacts/res_perlamutr.gif"></td>
+                            <td>=</td>
+                            <td><img height="50px" width="50px" src="http://www.warofdragons.com/images/data/artifacts/res_laz_losos.gif"></td>
+                            <td><img height="50px" width="50px" src="http://www.warofdragons.com/images/data/artifacts/res_zigred_kislota.gif"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="8" style="font-weight:bolder; font-size:larger; color:White; background-color:#222222">Amount in Backpack</td>
+                            <td style="font-weight: bold">Liquid Nacre</td>
+                            <td>=</td>
+                            <td style="font-weight: bold">Azure Salmon</td>
+                            <td style="font-weight: bold">Scorpion Bile</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input style="width:50px" type="text" id="onHandBlood"></td>
+                            <td><input style="width:50px" type="text" id="onHandGrass"></td>
+                            <td><input style="width:50px" type="text" id="onHandStone"></td>
+                            <td><input style="width:50px" type="text" id="onHandAzure"></td>
+                            <td><input style="width:50px" type="text" id="onHandSkull"></td>
+                            <td><input style="width:50px" type="text" id="onHandStriped"></td>
+                            <td><input style="width:50px" type="text" id="onHandIdalle"></td>
+                            <td><div id="dragonBloodDustNeeded">0</div></td>
+                            <td>=</td>
+                            <td><div id="dragonBloodNeeded">0</div></td>
+                            <td><div id="teethNeeded">0</div></td>
+                        </tr>
+                        <tr>
+                            <td colspan="8" style="font-weight:bolder; font-size:larger; color:White; background-color:#222222">Amount Needed</td>
+                            <td colspan="4" style="font-weight:bolder; font-size:larger; color:White; background-color:#222222">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td style="font-weight: bold">Dragon Blood</td>
+                            <td style="font-weight: bold">Magic Purple Ink</td>
+                            <td style="font-weight: bold">Liquid Nacre</td>
+                            <td style="font-weight: bold">Heat Flower</td>
+                            <td style="font-weight: bold">Licious Flower</td>
+                            <td style="font-weight: bold">Crystalline Coal</td>
+                            <td style="font-weight: bold">Idalle</td>
+                            <td style="font-weight: bold" colspan="4">Permanent Effect</td>
+                        </tr>
+                        <tr>
+                            <td><img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_drakon_gray.gif"></td>
+                            <td><div id="grayBlood">0</div></td>
+                            <td><div id="grayGrass">0</div></td>
+                            <td><div id="grayStone">0</div></td>
+                            <td><div id="grayAzure">0</div></td>
+                            <td><div id="graySkull">0</div></td>
+                            <td><div id="grayStriped">0</div></td>
+                            <td><div id="grayIdalle">0</div></td>
+                            <td><img height="30px" width="30px" src="http://w1.dwar.ru/images/data/artifacts/drakon_buff1_091201.gif"></td>
+                            <td colspan="3">Increase damage 10%.</td>
+                        </tr>
+                        <tr>
+                            <td><img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_drakon_green.gif"></td>
+                            <td><div id="greenBlood">0</div></td>
+                            <td><div id="greenGrass">0</div></td>
+                            <td><div id="greenStone">0</div></td>
+                            <td><div id="greenAzure">0</div></td>
+                            <td><div id="greenSkull">0</div></td>
+                            <td><div id="greenStriped">0</div></td>
+                            <td><div id="greenIdalle">0</div></td>
+                            <td><img height="30px" width="30px" src="http://w1.dwar.ru/images/data/artifacts/drakon_buff2_091201.gif"></td>
+                            <td colspan="3">Increase damage 13%.</td>
+                        </tr>
+                        <tr>
+                            <td><img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_drakon_blue.gif"></td>
+                            <td><div id="blueBlood">0</div></td>
+                            <td><div id="blueGrass">0</div></td>
+                            <td><div id="blueStone">0</div></td>
+                            <td><div id="blueAzure">0</div></td>
+                            <td><div id="blueSkull">0</div></td>
+                            <td><div id="blueStriped">0</div></td>
+                            <td><div id="blueIdalle">0</div></td>
+                            <td><img height="30px" width="30px" src="http://w1.dwar.ru/images/data/artifacts/drakon_buff3_091201.gif"></td>
+                            <td colspan="3">Increase damage 17%.</td>
+                        </tr>
+                        <tr>
+                            <td><img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_drakon_fio.gif"></td>
+                            <td><div id="purpleBlood">0</div></td>
+                            <td><div id="purpleGrass">0</div></td>
+                            <td><div id="purpleStone">0</div></td>
+                            <td><div id="purpleAzure">0</div></td>
+                            <td><div id="purpleSkull">0</div></td>
+                            <td><div id="purpleStriped">0</div></td>
+                            <td><div id="purpleIdalle">0</div></td>
+                            <td><img height="30px" width="30px" src="http://w1.dwar.ru/images/data/artifacts/drakon_buff4_091201.gif"></td>
+                            <td colspan="3">Increase damage 17% and reduce damage 4%.</td>
+                        </tr>
+                        <tr>
+                            <td><img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_drakon_red.gif"></td>
+                            <td><div id="redBlood">0</div></td>
+                            <td><div id="redGrass">0</div></td>
+                            <td><div id="redStone">0</div></td>
+                            <td><div id="Div4">-</div></td>
+                            <td><div id="Div5">-</div></td>
+                            <td><div id="Div6">-</div></td>
+                            <td><div id="Div7">-</div></td>
+                            <td><img height="30px" width="30px" src="http://w1.dwar.ru/images/data/artifacts/drakon_buff5_091201.gif"></td>
+                            <td colspan="3">Increase damage 17% and reduce damage 10%.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>
+                <input type="button" id="savebutton" value="Save" class="ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false">
+            </td>
+            <td>
+                <a target="_blank" href="http://sites.google.com/site/info4wod/reputations/great-dragon-reputation">Great Dragon Page - Mentor Site</a><br>
+                <a target="_blank" href="http://www.warofdragons.com/info/library/index.php?obj=cat&id=118">Great Dragon Page - War of Dragons Site</a><br>
+            </td>
+        </tr>
+        <tr>
+            <td><br />Created By:&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://warofdragons.com/user_info.php?nick=DragonAxe"><b>DragonAxe</b></a></td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <br>
+</body></html>

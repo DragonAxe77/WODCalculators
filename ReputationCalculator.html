@@ -1,0 +1,1408 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Reputation Rating Calculator</title>
+    <!-- This calculator is made by DragonAxe for the game War of Dragons.  
+         Anybody is welcome to copy and use it but please leave this line in. -->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-darkness/jquery-ui.css" type="text/css" media="all" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://files1.guildlaunch.net/guild/library/278154/jquery.cookie.js"></script>
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function() {
+            initialize();
+        });
+        function initialize() {
+            $("#boeCB").change(function() {
+                calculateRep();
+            });
+            $("#boePB").change(function() {
+                calculateRep();
+            });
+            $("#boeCB").val($.cookie('ReputationCalculatorCurrentBOE'));
+            $("#boePB").val($.cookie('ReputationCalculatorPlannedBOE'));
+            $("#bovCB").change(function() {
+                calculateRep();
+            });
+            $("#bovPB").change(function() {
+                calculateRep();
+            });
+            $("#bovCB").val($.cookie('ReputationCalculatorCurrentBOV'));
+            $("#bovPB").val($.cookie('ReputationCalculatorPlannedBOV'));
+            $("#chaosCB").change(function() {
+                calculateRep();
+            });
+            $("#chaosPB").change(function() {
+                calculateRep();
+            });
+            $("#chaosCB").val($.cookie('ReputationCalculatorCurrentChaos'));
+            $("#chaosPB").val($.cookie('ReputationCalculatorPlannedChaos'));
+            $("#eldiveCB").change(function() {
+                calculateRep();
+            });
+            $("#eldivePB").change(function() {
+                calculateRep();
+            });
+            $("#eldiveCB").val($.cookie('ReputationCalculatorCurrentEldive'));
+            $("#eldivePB").val($.cookie('ReputationCalculatorPlannedEldive'));
+            $("#flaudCB").change(function() {
+                calculateRep();
+            });
+            $("#flaudPB").change(function() {
+                calculateRep();
+            });
+            $("#flaudCB").val($.cookie('ReputationCalculatorCurrentflaud'));
+            $("#flaudPB").val($.cookie('ReputationCalculatorPlannedflaud'));
+            $("#cursedCB").change(function() {
+                calculateRep();
+            });
+            $("#cursedPB").change(function() {
+                calculateRep();
+            });
+            $("#cursedCB").val($.cookie('ReputationCalculatorCurrentcursed'));
+            $("#cursedPB").val($.cookie('ReputationCalculatorPlannedcursed'));
+            $("#godCB").change(function() {
+                calculateRep();
+            });
+            $("#godPB").change(function() {
+                calculateRep();
+            });
+            $("#godCB").val($.cookie('ReputationCalculatorCurrentGod'));
+            $("#godPB").val($.cookie('ReputationCalculatorPlannedGod'));
+            $("#gbCB").change(function() {
+                calculateRep();
+            });
+            $("#gbPB").change(function() {
+                calculateRep();
+            });
+            $("#gbCB").val($.cookie('ReputationCalculatorCurrentgb'));
+            $("#gbPB").val($.cookie('ReputationCalculatorPlannedgb'));
+            $("#dragonCB").change(function() {
+                calculateRep();
+            });
+            $("#dragonPB").change(function() {
+                calculateRep();
+            });
+            $("#dragonCB").val($.cookie('ReputationCalculatorCurrentdragon'));
+            $("#dragonPB").val($.cookie('ReputationCalculatorPlanneddragon'));
+            $("#hofCB").change(function() {
+                calculateRep();
+            });
+            $("#hofPB").change(function() {
+                calculateRep();
+            });
+            $("#hofCB").val($.cookie('ReputationCalculatorCurrenthof'));
+            $("#hofPB").val($.cookie('ReputationCalculatorPlannedhof'));
+            $("#undeadCB").change(function() {
+                calculateRep();
+            });
+            $("#undeadPB").change(function() {
+                calculateRep();
+            });
+            $("#undeadCB").val($.cookie('ReputationCalculatorCurrentundead'));
+            $("#undeadPB").val($.cookie('ReputationCalculatorPlannedundead'));
+            $("#juggerCB").change(function() {
+                calculateRep();
+            });
+            $("#juggerPB").change(function() {
+                calculateRep();
+            });
+            $("#juggerCB").val($.cookie('ReputationCalculatorCurrentjugger'));
+            $("#juggerPB").val($.cookie('ReputationCalculatorPlannedjugger'));
+            $("#kroffCB").change(function() {
+                calculateRep();
+            });
+            $("#kroffPB").change(function() {
+                calculateRep();
+            });
+            $("#kroffCB").val($.cookie('ReputationCalculatorCurrentkroff'));
+            $("#kroffPB").val($.cookie('ReputationCalculatorPlannedkroff'));
+            $("#petCB").change(function() {
+                calculateRep();
+            });
+            $("#petPB").change(function() {
+                calculateRep();
+            });
+            $("#petCB").val($.cookie('ReputationCalculatorCurrentpet'));
+            $("#petPB").val($.cookie('ReputationCalculatorPlannedpet'));
+            $("#nsCB").change(function() {
+                calculateRep();
+            });
+            $("#nsPB").change(function() {
+                calculateRep();
+            });
+            $("#nsCB").val($.cookie('ReputationCalculatorCurrentns'));
+            $("#nsPB").val($.cookie('ReputationCalculatorPlannedns'));
+            $("#raCB").change(function() {
+                calculateRep();
+            });
+            $("#raPB").change(function() {
+                calculateRep();
+            });
+            $("#raCB").val($.cookie('ReputationCalculatorCurrentra'));
+            $("#raPB").val($.cookie('ReputationCalculatorPlannedra'));
+            $("#relicCB").change(function() {
+                calculateRep();
+            });
+            $("#relicPB").change(function() {
+                calculateRep();
+            });
+            $("#relicCB").val($.cookie('ReputationCalculatorCurrentrelic'));
+            $("#relicPB").val($.cookie('ReputationCalculatorPlannedrelic'));
+            $("#shadowCB").change(function() {
+                calculateRep();
+            });
+            $("#shadowPB").change(function() {
+                calculateRep();
+            });
+            $("#shadowCB").val($.cookie('ReputationCalculatorCurrentshadow'));
+            $("#shadowPB").val($.cookie('ReputationCalculatorPlannedshadow'));
+            $("#ukCB").change(function() {
+                calculateRep();
+            });
+            $("#ukPB").change(function() {
+                calculateRep();
+            });
+            $("#ukCB").val($.cookie('ReputationCalculatorCurrentuk'));
+            $("#ukPB").val($.cookie('ReputationCalculatorPlanneduk'));
+
+            $("#savebutton").button();
+            $("#savebutton").click(function() {
+                var currentrep = Number($("#currentrep").val());
+                var plannedrep = Number($("#plannedrep").val());
+                $.cookie('ReputationCalculatorCurrentRep', currentrep, { expires: 999 });
+                $.cookie('ReputationCalculatorPlannedRep', plannedrep, { expires: 999 });
+                var currentboe = $("#boeCB").val();
+                var plannedboe = $("#boePB").val();
+                $.cookie('ReputationCalculatorCurrentBOE', currentboe, { expires: 999 });
+                $.cookie('ReputationCalculatorPlannedBOE', plannedboe, { expires: 999 });
+                var currentbov = $("#bovCB").val();
+                var plannedbov = $("#bovPB").val();
+                $.cookie('ReputationCalculatorCurrentBOV', currentbov, { expires: 999 });
+                $.cookie('ReputationCalculatorPlannedBOV', plannedbov, { expires: 999 });
+                var currentchaos = $("#chaosCB").val();
+                var plannedchaos = $("#chaosPB").val();
+                $.cookie('ReputationCalculatorCurrentChaos', currentchaos, { expires: 999 });
+                $.cookie('ReputationCalculatorPlannedChaos', plannedchaos, { expires: 999 });
+                var currenteldive = $("#eldiveCB").val();
+                var plannedeldive = $("#eldivePB").val();
+                $.cookie('ReputationCalculatorCurrentEldive', currenteldive, { expires: 999 });
+                $.cookie('ReputationCalculatorPlannedEldive', plannedeldive, { expires: 999 });
+                var currentflaud = $("#flaudCB").val();
+                var plannedflaud = $("#flaudPB").val();
+                $.cookie('ReputationCalculatorCurrentflaud', currentflaud, { expires: 999 });
+                $.cookie('ReputationCalculatorPlannedflaud', plannedflaud, { expires: 999 });
+                var currentcursed = $("#cursedCB").val();
+                var plannedcursed = $("#cursedPB").val();
+                $.cookie('ReputationCalculatorCurrentcursed', currentcursed, { expires: 999 });
+                $.cookie('ReputationCalculatorPlannedcursed', plannedcursed, { expires: 999 });
+                var currentgod = $("#godCB").val();
+                var plannedgod = $("#godPB").val();
+                $.cookie('ReputationCalculatorCurrentGod', currentgod, { expires: 999 });
+                $.cookie('ReputationCalculatorPlannedGod', plannedgod, { expires: 999 });
+                var currentgb = $("#gbCB").val();
+                var plannedgb = $("#gbPB").val();
+                $.cookie('ReputationCalculatorCurrentgb', currentgb, { expires: 999 });
+                $.cookie('ReputationCalculatorPlannedgb', plannedgb, { expires: 999 });
+                var currentdragon = $("#dragonCB").val();
+                var planneddragon = $("#dragonPB").val();
+                $.cookie('ReputationCalculatorCurrentdragon', currentdragon, { expires: 999 });
+                $.cookie('ReputationCalculatorPlanneddragon', planneddragon, { expires: 999 });
+                var currenthof = $("#hofCB").val();
+                var plannedhof = $("#hofPB").val();
+                $.cookie('ReputationCalculatorCurrenthof', currenthof, { expires: 999 });
+                $.cookie('ReputationCalculatorPlannedhof', plannedhof, { expires: 999 });
+                var currentundead = $("#undeadCB").val();
+                var plannedundead = $("#undeadPB").val();
+                $.cookie('ReputationCalculatorCurrentundead', currentundead, { expires: 999 });
+                $.cookie('ReputationCalculatorPlannedundead', plannedundead, { expires: 999 });
+                var currentjugger = $("#juggerCB").val();
+                var plannedjugger = $("#juggerPB").val();
+                $.cookie('ReputationCalculatorCurrentjugger', currentjugger, { expires: 999 });
+                $.cookie('ReputationCalculatorPlannedjugger', plannedjugger, { expires: 999 });
+                var currentkroff = $("#kroffCB").val();
+                var plannedkroff = $("#kroffPB").val();
+                $.cookie('ReputationCalculatorCurrentkroff', currentkroff, { expires: 999 });
+                $.cookie('ReputationCalculatorPlannedkroff', plannedkroff, { expires: 999 });
+                var currentpet = $("#petCB").val();
+                var plannedpet = $("#petPB").val();
+                $.cookie('ReputationCalculatorCurrentpet', currentpet, { expires: 999 });
+                $.cookie('ReputationCalculatorPlannedpet', plannedpet, { expires: 999 });
+                var currentns = $("#nsCB").val();
+                var plannedns = $("#nsPB").val();
+                $.cookie('ReputationCalculatorCurrentns', currentns, { expires: 999 });
+                $.cookie('ReputationCalculatorPlannedns', plannedns, { expires: 999 });
+                var currentra = $("#raCB").val();
+                var plannedra = $("#raPB").val();
+                $.cookie('ReputationCalculatorCurrentra', currentra, { expires: 999 });
+                $.cookie('ReputationCalculatorPlannedra', plannedra, { expires: 999 });
+                var currentrelic = $("#relicCB").val();
+                var plannedrelic = $("#relicPB").val();
+                $.cookie('ReputationCalculatorCurrentrelic', currentrelic, { expires: 999 });
+                $.cookie('ReputationCalculatorPlannedrelic', plannedrelic, { expires: 999 });
+                var currentuk = $("#ukCB").val();
+                var planneduk = $("#ukPB").val();
+                $.cookie('ReputationCalculatorCurrentuk', currentuk, { expires: 999 });
+                $.cookie('ReputationCalculatorPlanneduk', planneduk, { expires: 999 });
+                var currentuk = $("#shadowCB").val();
+                var planneduk = $("#shadowPB").val();
+                $.cookie('ReputationCalculatorCurrentshadow', currentuk, { expires: 999 });
+                $.cookie('ReputationCalculatorPlannedshadow', planneduk, { expires: 999 });
+            });
+            $("#currentrep").val($.cookie('ReputationCalculatorCurrentRep'));
+            $("#plannedrep").val($.cookie('ReputationCalculatorPlannedRep'));
+            calculateRep();
+        }
+        function calculateRep() {
+            var currentrep = 0;
+            var plannedrep = 0;
+
+            if ($("#boeCB").val() == "red") {
+                currentrep = currentrep + 300;
+            } else if ($("#boeCB").val() == "purple") {
+                currentrep = currentrep + 100;
+            } else if ($("#boeCB").val() == "blue") {
+                currentrep = currentrep + 50;
+            } else if ($("#boeCB").val() == "green") {
+                currentrep = currentrep + 20;
+            } else if ($("#boeCB").val() == "gray") {
+                currentrep = currentrep + 10;
+            }
+
+            if ($("#boePB").val() == "red") {
+                plannedrep = plannedrep + 300;
+            } else if ($("#boePB").val() == "purple") {
+                plannedrep = plannedrep + 100;
+            } else if ($("#boePB").val() == "blue") {
+                plannedrep = plannedrep + 50;
+            } else if ($("#boePB").val() == "green") {
+                plannedrep = plannedrep + 20;
+            } else if ($("#boePB").val() == "gray") {
+                plannedrep = plannedrep + 10;
+            }
+
+            if ($("#bovCB").val() == "red") {
+                currentrep = currentrep + 300;
+            } else if ($("#bovCB").val() == "purple") {
+                currentrep = currentrep + 100;
+            } else if ($("#bovCB").val() == "blue") {
+                currentrep = currentrep + 50;
+            } else if ($("#bovCB").val() == "green") {
+                currentrep = currentrep + 20;
+            } else if ($("#bovCB").val() == "gray") {
+                currentrep = currentrep + 10;
+            }
+
+            if ($("#bovPB").val() == "red") {
+                plannedrep = plannedrep + 300;
+            } else if ($("#bovPB").val() == "purple") {
+                plannedrep = plannedrep + 100;
+            } else if ($("#bovPB").val() == "blue") {
+                plannedrep = plannedrep + 50;
+            } else if ($("#bovPB").val() == "green") {
+                plannedrep = plannedrep + 20;
+            } else if ($("#bovPB").val() == "gray") {
+                plannedrep = plannedrep + 10;
+            }
+
+            if ($("#chaosCB").val() == "red") {
+                currentrep = currentrep + 300;
+            } else if ($("#chaosCB").val() == "purple") {
+                currentrep = currentrep + 100;
+            } else if ($("#chaosCB").val() == "blue") {
+                currentrep = currentrep + 50;
+            } else if ($("#chaosCB").val() == "green") {
+                currentrep = currentrep + 20;
+            } else if ($("#chaosCB").val() == "gray") {
+                currentrep = currentrep + 10;
+            }
+
+            if ($("#chaosPB").val() == "red") {
+                plannedrep = plannedrep + 300;
+            } else if ($("#chaosPB").val() == "purple") {
+                plannedrep = plannedrep + 100;
+            } else if ($("#chaosPB").val() == "blue") {
+                plannedrep = plannedrep + 50;
+            } else if ($("#chaosPB").val() == "green") {
+                plannedrep = plannedrep + 20;
+            } else if ($("#chaosPB").val() == "gray") {
+                plannedrep = plannedrep + 10;
+            }
+
+            if ($("#eldiveCB").val() == "red") {
+                currentrep = currentrep + 300;
+            } else if ($("#eldiveCB").val() == "purple") {
+                currentrep = currentrep + 100;
+            } else if ($("#eldiveCB").val() == "blue") {
+                currentrep = currentrep + 50;
+            } else if ($("#eldiveCB").val() == "green") {
+                currentrep = currentrep + 20;
+            } else if ($("#eldiveCB").val() == "gray") {
+                currentrep = currentrep + 10;
+            }
+
+            if ($("#eldivePB").val() == "red") {
+                plannedrep = plannedrep + 300;
+            } else if ($("#eldivePB").val() == "purple") {
+                plannedrep = plannedrep + 100;
+            } else if ($("#eldivePB").val() == "blue") {
+                plannedrep = plannedrep + 50;
+            } else if ($("#eldivePB").val() == "green") {
+                plannedrep = plannedrep + 20;
+            } else if ($("#eldivePB").val() == "gray") {
+                plannedrep = plannedrep + 10;
+            }
+
+            if ($("#flaudCB").val() == "red") {
+                currentrep = currentrep + 300;
+            } else if ($("#flaudCB").val() == "purple") {
+                currentrep = currentrep + 100;
+            } else if ($("#flaudCB").val() == "blue") {
+                currentrep = currentrep + 50;
+            } else if ($("#flaudCB").val() == "green") {
+                currentrep = currentrep + 20;
+            } else if ($("#flaudCB").val() == "gray") {
+                currentrep = currentrep + 10;
+            }
+
+            if ($("#flaudPB").val() == "red") {
+                plannedrep = plannedrep + 300;
+            } else if ($("#flaudPB").val() == "purple") {
+                plannedrep = plannedrep + 100;
+            } else if ($("#flaudPB").val() == "blue") {
+                plannedrep = plannedrep + 50;
+            } else if ($("#flaudPB").val() == "green") {
+                plannedrep = plannedrep + 20;
+            } else if ($("#flaudPB").val() == "gray") {
+                plannedrep = plannedrep + 10;
+            }
+
+            if ($("#cursedCB").val() == "red") {
+                currentrep = currentrep + 300;
+            } else if ($("#cursedCB").val() == "purple") {
+                currentrep = currentrep + 100;
+            } else if ($("#cursedCB").val() == "blue") {
+                currentrep = currentrep + 50;
+            } else if ($("#cursedCB").val() == "green") {
+                currentrep = currentrep + 20;
+            } else if ($("#cursedCB").val() == "gray") {
+                currentrep = currentrep + 10;
+            }
+
+            if ($("#cursedPB").val() == "red") {
+                plannedrep = plannedrep + 300;
+            } else if ($("#cursedPB").val() == "purple") {
+                plannedrep = plannedrep + 100;
+            } else if ($("#cursedPB").val() == "blue") {
+                plannedrep = plannedrep + 50;
+            } else if ($("#cursedPB").val() == "green") {
+                plannedrep = plannedrep + 20;
+            } else if ($("#cursedPB").val() == "gray") {
+                plannedrep = plannedrep + 10;
+            }
+
+            if ($("#godCB").val() == "red") {
+                currentrep = currentrep + 300;
+            } else if ($("#godCB").val() == "purple") {
+                currentrep = currentrep + 100;
+            } else if ($("#godCB").val() == "blue") {
+                currentrep = currentrep + 50;
+            } else if ($("#godCB").val() == "green") {
+                currentrep = currentrep + 20;
+            } else if ($("#godCB").val() == "gray") {
+                currentrep = currentrep + 10;
+            }
+
+            if ($("#godPB").val() == "red") {
+                plannedrep = plannedrep + 300;
+            } else if ($("#godPB").val() == "purple") {
+                plannedrep = plannedrep + 100;
+            } else if ($("#godPB").val() == "blue") {
+                plannedrep = plannedrep + 50;
+            } else if ($("#godPB").val() == "green") {
+                plannedrep = plannedrep + 20;
+            } else if ($("#godPB").val() == "gray") {
+                plannedrep = plannedrep + 10;
+            }
+
+            if ($("#gbCB").val() == "red") {
+                currentrep = currentrep + 300;
+            } else if ($("#gbCB").val() == "purple") {
+                currentrep = currentrep + 100;
+            } else if ($("#gbCB").val() == "blue") {
+                currentrep = currentrep + 50;
+            } else if ($("#gbCB").val() == "green") {
+                currentrep = currentrep + 20;
+            } else if ($("#gbCB").val() == "gray") {
+                currentrep = currentrep + 10;
+            }
+
+            if ($("#gbPB").val() == "red") {
+                plannedrep = plannedrep + 300;
+            } else if ($("#gbPB").val() == "purple") {
+                plannedrep = plannedrep + 100;
+            } else if ($("#gbPB").val() == "blue") {
+                plannedrep = plannedrep + 50;
+            } else if ($("#gbPB").val() == "green") {
+                plannedrep = plannedrep + 20;
+            } else if ($("#gbPB").val() == "gray") {
+                plannedrep = plannedrep + 10;
+            }
+
+            if ($("#dragonCB").val() == "red") {
+                currentrep = currentrep + 300;
+            } else if ($("#dragonCB").val() == "purple") {
+                currentrep = currentrep + 100;
+            } else if ($("#dragonCB").val() == "blue") {
+                currentrep = currentrep + 50;
+            } else if ($("#dragonCB").val() == "green") {
+                currentrep = currentrep + 20;
+            } else if ($("#dragonCB").val() == "gray") {
+                currentrep = currentrep + 10;
+            }
+
+            if ($("#dragonPB").val() == "red") {
+                plannedrep = plannedrep + 300;
+            } else if ($("#dragonPB").val() == "purple") {
+                plannedrep = plannedrep + 100;
+            } else if ($("#dragonPB").val() == "blue") {
+                plannedrep = plannedrep + 50;
+            } else if ($("#dragonPB").val() == "green") {
+                plannedrep = plannedrep + 20;
+            } else if ($("#dragonPB").val() == "gray") {
+                plannedrep = plannedrep + 10;
+            }
+
+            if ($("#hofCB").val() == "red") {
+                currentrep = currentrep + 300;
+            } else if ($("#hofCB").val() == "purple") {
+                currentrep = currentrep + 100;
+            } else if ($("#hofCB").val() == "blue") {
+                currentrep = currentrep + 50;
+            } else if ($("#hofCB").val() == "green") {
+                currentrep = currentrep + 20;
+            } else if ($("#hofCB").val() == "gray") {
+                currentrep = currentrep + 10;
+            }
+
+            if ($("#hofPB").val() == "red") {
+                plannedrep = plannedrep + 300;
+            } else if ($("#hofPB").val() == "purple") {
+                plannedrep = plannedrep + 100;
+            } else if ($("#hofPB").val() == "blue") {
+                plannedrep = plannedrep + 50;
+            } else if ($("#hofPB").val() == "green") {
+                plannedrep = plannedrep + 20;
+            } else if ($("#hofPB").val() == "gray") {
+                plannedrep = plannedrep + 10;
+            }
+
+            if ($("#undeadCB").val() == "red") {
+                currentrep = currentrep + 300;
+            } else if ($("#undeadCB").val() == "purple") {
+                currentrep = currentrep + 100;
+            } else if ($("#undeadCB").val() == "blue") {
+                currentrep = currentrep + 50;
+            } else if ($("#undeadCB").val() == "green") {
+                currentrep = currentrep + 20;
+            } else if ($("#undeadCB").val() == "gray") {
+                currentrep = currentrep + 10;
+            }
+
+            if ($("#undeadPB").val() == "red") {
+                plannedrep = plannedrep + 300;
+            } else if ($("#undeadPB").val() == "purple") {
+                plannedrep = plannedrep + 100;
+            } else if ($("#undeadPB").val() == "blue") {
+                plannedrep = plannedrep + 50;
+            } else if ($("#undeadPB").val() == "green") {
+                plannedrep = plannedrep + 20;
+            } else if ($("#undeadPB").val() == "gray") {
+                plannedrep = plannedrep + 10;
+            }
+
+            if ($("#juggerCB").val() == "red") {
+                currentrep = currentrep + 300;
+            } else if ($("#juggerCB").val() == "purple") {
+                currentrep = currentrep + 100;
+            } else if ($("#juggerCB").val() == "blue") {
+                currentrep = currentrep + 50;
+            } else if ($("#juggerCB").val() == "green") {
+                currentrep = currentrep + 20;
+            } else if ($("#juggerCB").val() == "gray") {
+                currentrep = currentrep + 10;
+            }
+
+            if ($("#juggerPB").val() == "red") {
+                plannedrep = plannedrep + 300;
+            } else if ($("#juggerPB").val() == "purple") {
+                plannedrep = plannedrep + 100;
+            } else if ($("#juggerPB").val() == "blue") {
+                plannedrep = plannedrep + 50;
+            } else if ($("#juggerPB").val() == "green") {
+                plannedrep = plannedrep + 20;
+            } else if ($("#juggerPB").val() == "gray") {
+                plannedrep = plannedrep + 10;
+            }
+
+            if ($("#kroffCB").val() == "red") {
+                currentrep = currentrep + 300;
+            } else if ($("#kroffCB").val() == "purple") {
+                currentrep = currentrep + 100;
+            } else if ($("#kroffCB").val() == "blue") {
+                currentrep = currentrep + 50;
+            } else if ($("#kroffCB").val() == "green") {
+                currentrep = currentrep + 20;
+            } else if ($("#kroffCB").val() == "gray") {
+                currentrep = currentrep + 10;
+            }
+
+            if ($("#kroffPB").val() == "red") {
+                plannedrep = plannedrep + 300;
+            } else if ($("#kroffPB").val() == "purple") {
+                plannedrep = plannedrep + 100;
+            } else if ($("#kroffPB").val() == "blue") {
+                plannedrep = plannedrep + 50;
+            } else if ($("#kroffPB").val() == "green") {
+                plannedrep = plannedrep + 20;
+            } else if ($("#kroffPB").val() == "gray") {
+                plannedrep = plannedrep + 10;
+            }
+
+            if ($("#petCB").val() == "red") {
+                currentrep = currentrep + 300;
+            } else if ($("#petCB").val() == "purple") {
+                currentrep = currentrep + 100;
+            } else if ($("#petCB").val() == "blue") {
+                currentrep = currentrep + 50;
+            } else if ($("#petCB").val() == "green") {
+                currentrep = currentrep + 20;
+            } else if ($("#petCB").val() == "gray") {
+                currentrep = currentrep + 10;
+            }
+
+            if ($("#petPB").val() == "red") {
+                plannedrep = plannedrep + 300;
+            } else if ($("#petPB").val() == "purple") {
+                plannedrep = plannedrep + 100;
+            } else if ($("#petPB").val() == "blue") {
+                plannedrep = plannedrep + 50;
+            } else if ($("#petPB").val() == "green") {
+                plannedrep = plannedrep + 20;
+            } else if ($("#petPB").val() == "gray") {
+                plannedrep = plannedrep + 10;
+            }
+
+            if ($("#nsCB").val() == "red") {
+                currentrep = currentrep + 300;
+            } else if ($("#nsCB").val() == "purple") {
+                currentrep = currentrep + 100;
+            } else if ($("#nsCB").val() == "blue") {
+                currentrep = currentrep + 50;
+            } else if ($("#nsCB").val() == "green") {
+                currentrep = currentrep + 20;
+            } else if ($("#nsCB").val() == "gray") {
+                currentrep = currentrep + 10;
+            }
+
+            if ($("#nsPB").val() == "red") {
+                plannedrep = plannedrep + 300;
+            } else if ($("#nsPB").val() == "purple") {
+                plannedrep = plannedrep + 100;
+            } else if ($("#nsPB").val() == "blue") {
+                plannedrep = plannedrep + 50;
+            } else if ($("#nsPB").val() == "green") {
+                plannedrep = plannedrep + 20;
+            } else if ($("#nsPB").val() == "gray") {
+                plannedrep = plannedrep + 10;
+            }
+
+            if ($("#raCB").val() == "red") {
+                currentrep = currentrep + 300;
+            } else if ($("#raCB").val() == "purple") {
+                currentrep = currentrep + 100;
+            } else if ($("#raCB").val() == "blue") {
+                currentrep = currentrep + 50;
+            } else if ($("#raCB").val() == "green") {
+                currentrep = currentrep + 20;
+            } else if ($("#raCB").val() == "gray") {
+                currentrep = currentrep + 10;
+            }
+
+            if ($("#raPB").val() == "red") {
+                plannedrep = plannedrep + 300;
+            } else if ($("#raPB").val() == "purple") {
+                plannedrep = plannedrep + 100;
+            } else if ($("#raPB").val() == "blue") {
+                plannedrep = plannedrep + 50;
+            } else if ($("#raPB").val() == "green") {
+                plannedrep = plannedrep + 20;
+            } else if ($("#raPB").val() == "gray") {
+                plannedrep = plannedrep + 10;
+            }
+
+            if ($("#relicCB").val() == "red") {
+                currentrep = currentrep + 300;
+            } else if ($("#relicCB").val() == "purple") {
+                currentrep = currentrep + 100;
+            } else if ($("#relicCB").val() == "blue") {
+                currentrep = currentrep + 50;
+            } else if ($("#relicCB").val() == "green") {
+                currentrep = currentrep + 20;
+            } else if ($("#relicCB").val() == "gray") {
+                currentrep = currentrep + 10;
+            }
+
+            if ($("#relicPB").val() == "red") {
+                plannedrep = plannedrep + 300;
+            } else if ($("#relicPB").val() == "purple") {
+                plannedrep = plannedrep + 100;
+            } else if ($("#relicPB").val() == "blue") {
+                plannedrep = plannedrep + 50;
+            } else if ($("#relicPB").val() == "green") {
+                plannedrep = plannedrep + 20;
+            } else if ($("#relicPB").val() == "gray") {
+                plannedrep = plannedrep + 10;
+            }
+
+            if ($("#ukCB").val() == "red") {
+                currentrep = currentrep + 300;
+            } else if ($("#ukCB").val() == "purple") {
+                currentrep = currentrep + 100;
+            } else if ($("#ukCB").val() == "blue") {
+                currentrep = currentrep + 50;
+            } else if ($("#ukCB").val() == "green") {
+                currentrep = currentrep + 20;
+            } else if ($("#ukCB").val() == "gray") {
+                currentrep = currentrep + 10;
+            }
+
+            if ($("#ukPB").val() == "red") {
+                plannedrep = plannedrep + 300;
+            } else if ($("#ukPB").val() == "purple") {
+                plannedrep = plannedrep + 100;
+            } else if ($("#ukPB").val() == "blue") {
+                plannedrep = plannedrep + 50;
+            } else if ($("#ukPB").val() == "green") {
+                plannedrep = plannedrep + 20;
+            } else if ($("#ukPB").val() == "gray") {
+                plannedrep = plannedrep + 10;
+            }
+
+            if ($("#shadowCB").val() == "red") {
+                currentrep = currentrep + 300;
+            } else if ($("#shadowCB").val() == "purple") {
+                currentrep = currentrep + 100;
+            } else if ($("#shadowCB").val() == "blue") {
+                currentrep = currentrep + 50;
+            } else if ($("#shadowCB").val() == "green") {
+                currentrep = currentrep + 20;
+            } else if ($("#shadowCB").val() == "gray") {
+                currentrep = currentrep + 10;
+            }
+
+            if ($("#shadowPB").val() == "red") {
+                plannedrep = plannedrep + 300;
+            } else if ($("#shadowPB").val() == "purple") {
+                plannedrep = plannedrep + 100;
+            } else if ($("#shadowPB").val() == "blue") {
+                plannedrep = plannedrep + 50;
+            } else if ($("#shadowPB").val() == "green") {
+                plannedrep = plannedrep + 20;
+            } else if ($("#shadowPB").val() == "gray") {
+                plannedrep = plannedrep + 10;
+            }
+            
+            $("#currentrep").val(currentrep);
+            $("#plannedrep").val(plannedrep);
+        }         
+    </script>
+    <style type="text/css">
+        body 
+        {
+            color : White;
+            background : Black;
+            font-family : Calibri;
+            font-size: 10pt;
+        }
+        a 
+        {
+            color : White;
+            background : Black;
+            font-family : Calibri;
+        }
+        .tb
+        {
+            background-image : url('http://www.warofdragons.com/images/tbl-usi_bg.gif');
+            color : Black;
+            border-width : medium;
+            text-align : center;
+            width : 830px;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td align="center">
+                <table border="1" class="tb">
+                    <tbody>
+                        <tr>
+                            <td colspan="2"><h1>Reputation Rating Calculator</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <table border="1" class="tb">
+                    <tbody>
+                        <tr>
+                            <td style="font-size:14px;font-weight:bolder" align="right"><b>Current Reputation:</b></td>
+                            <td colspan="2"><input style="width:200px" type="text" id="currentrep"></td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#222222">&nbsp;</td>
+                            <td style="font-size:14px;font-weight:bolder" align="right"><b>Planned Reputation:</b></td>
+                            <td colspan="2"><input style="width:200px" type="text" id="plannedrep"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table border="1" cellpadding="5" class="tb">
+                    <tbody>
+                        <tr>
+                            <td colspan="2" style="font-weight:bolder; font-size:larger; color:White; background-color:#222222">Reputations</td></td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#222222">Current Badge</td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#222222">Planned Badge</td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:14px;font-weight:bolder">Bringer of Evil</td>
+                            <td>
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalzla_grey0611.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalzla_green0611.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalzla_blue0611.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalzla_fio1710.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalzla_red1812.gif">
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="boeCB" class="ui-button ui-widget ui-corner-all">
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="boePB" class="ui-button ui-widget ui-corner-all" >
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:14px;font-weight:bolder">Brotherhood of Virtue</td>
+                            <td>
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medaldobra_grey0610.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medaldobra_green0610.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medaldobra_bluey0610.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medaldobra_fio1710.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medaldobra_red1412.gif">
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="bovCB" class="ui-button ui-widget ui-corner-all">
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="bovPB" class="ui-button ui-widget ui-corner-all" >
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:14px;font-weight:bolder">Destroyer of Chaos</td>
+                            <td>
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalchaos_grey0711.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalchaos_green0711.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalchaos_blue0711.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalchaos_fio3110.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalchaos_red1311.gif">
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="chaosCB" class="ui-button ui-widget ui-corner-all">
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="chaosPB" class="ui-button ui-widget ui-corner-all" >
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:14px;font-weight:bolder">Eldives</td>
+                            <td>
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_eldiv_grey.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_eldiv_green.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_eldiv_blue.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_eldiv_fio.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_eldiv_red.gif">
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="eldiveCB" class="ui-button ui-widget ui-corner-all">
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="eldivePB" class="ui-button ui-widget ui-corner-all" >
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:14px;font-weight:bolder">Flaudins</td>
+                            <td>
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/sea_orden_grey.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/sea_orden_green.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/sea_orden_blue.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/sea_orden_fio.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/sea_orden_red.gif">
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="flaudCB" class="ui-button ui-widget ui-corner-all">
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="flaudPB" class="ui-button ui-widget ui-corner-all" >
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:14px;font-weight:bolder">God of Cursed and Death</td>
+                            <td>
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_proklya_gray.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_proklya_green.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_proklya_blue.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_proklya_fio.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_proklya_red.gif">
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="cursedCB" class="ui-button ui-widget ui-corner-all">
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="cursedPB" class="ui-button ui-widget ui-corner-all" >
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:14px;font-weight:bolder">Goddess Aladeya</td>
+                            <td>
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_prirody_gray.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_prirody_green.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_prirody_blue.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_prirody_fio.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_prirody_red.gif">
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="godCB" class="ui-button ui-widget ui-corner-all">
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="godPB" class="ui-button ui-widget ui-corner-all" >
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:14px;font-weight:bolder">Great Battles</td>
+                            <td>
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalvelbitva_grey_200208.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalvelbitva_green_200208.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalvelbitva_blue_200208.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalvelbitva_fio_200208.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalvelbitva_red_200208.gif">
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="gbCB" class="ui-button ui-widget ui-corner-all">
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="gbPB" class="ui-button ui-widget ui-corner-all" >
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:14px;font-weight:bolder">Great Dragon</td>
+                            <td>
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_drakon_gray.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_drakon_green.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_drakon_blue.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_drakon_fio.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_drakon_red.gif">
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="dragonCB" class="ui-button ui-widget ui-corner-all">
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="dragonPB" class="ui-button ui-widget ui-corner-all" >
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:14px;font-weight:bolder">Hunters of Fortune</td>
+                            <td>
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/fortuna_orden_grey.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/fortuna_orden_green.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/fortuna_orden_blue.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/fortuna_orden_fio.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/fortuna_orden_red.gif">
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="hofCB" class="ui-button ui-widget ui-corner-all">
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="hofPB" class="ui-button ui-widget ui-corner-all" >
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:14px;font-weight:bolder">Hunters of Undead</td>
+                            <td>
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalnezhit_grey1912.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalnezhit_green1912.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalnezhit_blue1912.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalnezhit_fio1912.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalnezhit_red1912.gif">
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="undeadCB" class="ui-button ui-widget ui-corner-all">
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="undeadPB" class="ui-button ui-widget ui-corner-all" >
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:14px;font-weight:bolder">Juggernauts</td>
+                            <td>
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/beasthunter_grey.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/beasthunter_green.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/beasthunter_blue.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/beasthunter_fio.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/beasthunter_red.gif">
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="juggerCB" class="ui-button ui-widget ui-corner-all">
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="juggerPB" class="ui-button ui-widget ui-corner-all" >
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:14px;font-weight:bolder">Kroffdors</td>
+                            <td>
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_krof_grey.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_krof_green.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_krof_blue.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_krof_fio.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medal_krof_red.gif">
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="kroffCB" class="ui-button ui-widget ui-corner-all">
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="kroffPB" class="ui-button ui-widget ui-corner-all" >
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:14px;font-weight:bolder">Master of Pets</td>
+                            <td>
+                                <img height="30px" width="30px" src="http://w1.dwar.ru/images/data/artifacts/medal_pokrov_pet1.gif">
+                                <img height="30px" width="30px" src="http://w1.dwar.ru/images/data/artifacts/medal_pokrov_pet2.gif">
+                                <img height="30px" width="30px" src="http://w1.dwar.ru/images/data/artifacts/medal_pokrov_pet3.gif">
+                                <img height="30px" width="30px" src="http://w1.dwar.ru/images/data/artifacts/medal_pokrov_pet4.gif">
+                                <img height="30px" width="30px" src="http://w1.dwar.ru/images/data/artifacts/medal_pokrov_pet5.gif">
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="petCB" class="ui-button ui-widget ui-corner-all">
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="petPB" class="ui-button ui-widget ui-corner-all" >
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:14px;font-weight:bolder">Night Stealers</td>
+                            <td>
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalnoch_grey.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalnoch_green.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalnoch_blue.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalnoch_fio.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalnoch_red.gif">
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="nsCB" class="ui-button ui-widget ui-corner-all">
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="nsPB" class="ui-button ui-widget ui-corner-all" >
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:14px;font-weight:bolder">Relic Seekers</td>
+                            <td>
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medaliskatelia_grey0611.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medaliskatelia_green0611.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medaliskatelia_blue0611.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medaliskatelia_fio1710.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medaliskatelia_red.gif">
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="relicCB" class="ui-button ui-widget ui-corner-all">
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="relicPB" class="ui-button ui-widget ui-corner-all" >
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:14px;font-weight:bolder">Shadow Catchers</td>
+                            <td>
+                                <img height="30px" width="30px" src="http://w1.dwar.ru/images/data/artifacts/med_lov_ten_ser.gif">
+                                <img height="30px" width="30px" src="http://w1.dwar.ru/images/data/artifacts/med_lov_ten_zel.gif">
+                                <img height="30px" width="30px" src="http://w1.dwar.ru/images/data/artifacts/med_lov_ten_sin.gif">
+                                <img height="30px" width="30px" src="http://w1.dwar.ru/images/data/artifacts/med_lov_ten_fio.gif">
+                                <img height="30px" width="30px" src="http://w1.dwar.ru/images/data/artifacts/med_lov_ten_red.gif">
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="shadowCB" class="ui-button ui-widget ui-corner-all">
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="shadowPB" class="ui-button ui-widget ui-corner-all" >
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:14px;font-weight:bolder">Stone Lotus</td>
+                            <td>
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medallotos_grey.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medallotos_green.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medallotos_blue.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medallotos_fio.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medallotos_red.gif">
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="raCB" class="ui-button ui-widget ui-corner-all">
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="raPB" class="ui-button ui-widget ui-corner-all" >
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:14px;font-weight:bolder">Underground Knights</td>
+                            <td>
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalricar_grey0611.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalricar_green0611.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalricar_blue0611.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalricar_fio.gif">
+                                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalricar_red.gif">
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="ukCB" class="ui-button ui-widget ui-corner-all">
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#000000">&nbsp;</td>
+                            <td>
+                                <select style="width:100px" id="ukPB" class="ui-button ui-widget ui-corner-all" >
+                                    <option value="None"></option>
+                                    <option value="red">Red</option>
+                                    <option value="purple">Purple</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="gray">Grey</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>
+                <input type="button" id="savebutton" value="Save" class="ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false">
+            </td>
+            <td>
+                <a target="_blank" href="https://sites.google.com/site/info4wod/reputations/reputation-rating">Reputation Page - Mentor Site</a><br>
+            </td>
+        </tr>
+        <tr>
+            <td><br />Created By:&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://warofdragons.com/user_info.php?nick=DragonAxe"><b>DragonAxe</b></a></td>
+        </tr>
+    </table>
+</body></html>

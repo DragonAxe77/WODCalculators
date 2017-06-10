@@ -1,0 +1,321 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Bringer of Evil Calculator</title>
+    <!-- This calculator is made by DragonAxe for the game War of Dragons.  
+         Anybody is welcome to copy and use it but please leave this line in. -->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-darkness/jquery-ui.css" type="text/css" media="all" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://files1.guildlaunch.net/guild/library/278154/jquery.cookie.js"></script>
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function() {
+            $("#currentrep").keydown(function(event) {
+                // Allow only backspace and delete
+                if (event.keyCode == 46 || event.keyCode == 8) {
+                }
+                else {
+                    // Ensure that it is a number and stop the keypress
+                    if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+                        event.preventDefault();
+                    }
+                }
+            });
+            $("#currentskull").keydown(function(event) {
+                // Allow only backspace and delete
+                if (event.keyCode == 46 || event.keyCode == 8) {
+                    // let it happen, don't do anything
+                }
+                else {
+                    // Ensure that it is a number and stop the keypress
+                    if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+                        event.preventDefault();
+                    }
+                }
+            });
+            $("#currentee").keydown(function(event) {
+                // Allow only backspace and delete
+                if (event.keyCode == 46 || event.keyCode == 8) {
+                    // let it happen, don't do anything
+                }
+                else {
+                    // Ensure that it is a number and stop the keypress
+                    if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+                        event.preventDefault();
+                    }
+                }
+            });
+            $("#currentrep").change(function() {
+                calculateEE();
+            });
+            $("#currentskull").change(function() {
+                calculateEE();
+            });
+            $("#currentee").change(function() {
+                calculateEE();
+            });
+            $("#savebutton").button();
+            $("#savebutton").click(function() {
+                var currentrep = Number($("#currentrep").val());
+                var currentskulls = Number($("#currentskull").val());
+                var currentees = Number($("#currentee").val());
+                $.cookie('BOECalculatorRep', currentrep, { expires: 999 });
+                $.cookie('BOECalculatorSkuls', currentskulls, { expires: 999 });
+                $.cookie('BOECalculatorEEs', currentees, { expires: 999 });
+            });
+            $("#currentrep").val($.cookie('BOECalculatorRep'));
+            $("#currentskull").val($.cookie('BOECalculatorSkuls'));
+            $("#currentee").val($.cookie('BOECalculatorEEs'));
+            calculateEE();
+        });
+        function calculateEE() {
+            var currentrep = Number($("#currentrep").val());
+            var currentskulls = Number($("#currentskull").val());
+            var currentees = Number($("#currentee").val());
+
+            //Gray Badge
+            if (currentrep >= 500) {
+                $("#grayeesneeded").html("0");
+                $("#grayskullsneeded").html("0");
+                var grayeeneedtotal = 0;
+                var grayskullneedtotal = 0;
+            }
+            else {
+                var numneeded = (500 - currentrep) / 10;
+                var grayeeneed = numneeded * 3;
+                var grayskullneed = numneeded * 5;
+                if (currentees > grayeeneed) {
+                    var grayeeneedtotal = 0;
+                    currentees = currentees - grayeeneed;
+                }
+                else {
+                    var grayeeneedtotal = grayeeneed - currentees;
+                    currentees = 0;
+                }
+                if (currentskulls > grayskullneed) {
+                    var grayskullneedtotal = 0;
+                    currentskulls = currentskulls - grayskullneed;
+                }
+                else {
+                    var grayskullneedtotal = grayskullneed - currentskulls;
+                    currentskulls = 0;
+                }
+                $("#grayeesneeded").html(grayeeneedtotal);
+                $("#grayskullsneeded").html(grayskullneedtotal);
+            }
+
+            //Green Badge
+            if (currentrep >= 1000) {
+                $("#greeneesneeded").html("0");
+                $("#greenskullsneeded").html("0");
+                var greeneeneedtotal = 0;
+                var greenskullneedtotal = 0;
+            }
+            else {
+                if (currentrep <= 500) {
+                    var numneeded = 50;
+                }
+                else {
+                    var numneeded = (1000 - currentrep) / 10;
+                }
+                var greeneeneed = (numneeded * 3);
+                var greenskullneed = (numneeded * 5);
+                if (currentees > greeneeneed) {
+                    var greeneeneedtotal = 0;
+                    currentees = currentees - greeneeneed;
+                }
+                else {
+                    var greeneeneedtotal = greeneeneed - currentees + grayeeneedtotal;
+                    currentees = 0;
+                }
+                if (currentskulls > greenskullneed) {
+                    var greenskullneedtotal = 0;
+                    currentskulls = currentskulls - greenskullneed;
+                }
+                else {
+                    var greenskullneedtotal = greenskullneed - currentskulls + grayskullneedtotal;
+                    currentskulls = 0;
+                }
+                $("#greeneesneeded").html(greeneeneedtotal);
+                $("#greenskullsneeded").html(greenskullneedtotal);
+            }
+
+            //Blue Badge
+            if (currentrep >= 2000) {
+                $("#blueeesneeded").html("0");
+                $("#blueskullsneeded").html("0");
+                var blueeeneedtotal = 0;
+                var blueskullneedtotal = 0;
+            }
+            else {
+                if (currentrep <= 1000) {
+                    var numneeded = 100;
+                }
+                else {
+                    var numneeded = (2000 - currentrep) / 10;
+                }
+                var blueeeneed = (numneeded * 4);
+                var blueskullneed = (numneeded * 5);
+                if (currentees > blueeeneed) {
+                    var blueeeneedtotal = 0;
+                    currentees = currentees - blueeeneed;
+                }
+                else {
+                    var blueeeneedtotal = blueeeneed - currentees + greeneeneedtotal;
+                    currentees = 0;
+                }
+                if (currentskulls > blueskullneed) {
+                    var blueskullneedtotal = 0;
+                    currentskulls = currentskulls - blueskullneed;
+                }
+                else {
+                    var blueskullneedtotal = blueskullneed - currentskulls + greenskullneedtotal;
+                    currentskulls = 0;
+                }
+                $("#blueeesneeded").html(blueeeneedtotal);
+                $("#blueskullsneeded").html(blueskullneedtotal);
+            }
+
+            //Purple Badge
+            if (currentrep >= 3000) {
+                $("#purpleeesneeded").html("0");
+                $("#purpleskullsneeded").html("0");
+                var purpleeeneedtotal = 0;
+                var purpleskullneedtotal = 0;
+            }
+            else {
+                if (currentrep <= 2000) {
+                    var numneeded = 100;
+                }
+                else {
+                    var numneeded = (3000 - currentrep) / 10;
+                }
+                var purpleeeneed = (numneeded * 5);
+                var purpleskullneed = (numneeded * 5);
+                if (currentees > purpleeeneed) {
+                    var purpleeeneedtotal = 0;
+                    currentees = currentees - purpleeeneed;
+                }
+                else {
+                    var purpleeeneedtotal = purpleeeneed - currentees + blueeeneedtotal;
+                    currentees = 0;
+                }
+                if (currentskulls > purpleskullneed) {
+                    var purpleskullneedtotal = 0;
+                    currentskulls = currentskulls - purpleskullneed;
+                }
+                else {
+                    var purpleskullneedtotal = purpleskullneed - currentskulls + blueskullneedtotal;
+                    currentskulls = 0;
+                }
+                $("#purpleeesneeded").html(purpleeeneedtotal);
+                $("#purpleskullsneeded").html(purpleskullneedtotal);
+            }
+
+            //Red Badge
+            $("#redeesneeded").html(500 + purpleeeneedtotal - currentees);
+            $("#redskullsneeded").html(purpleskullneedtotal);
+        }         
+    </script>
+    <style type="text/css">
+        body 
+        {
+            color : White;
+            background : Black;
+            font-family : Calibri;
+        }
+        a 
+        {
+            color : White;
+            background : Black;
+            font-family : Calibri;
+        }
+        .tb
+        {
+            background-image : url('http://www.warofdragons.com/images/tbl-usi_bg.gif');
+            color : Black;
+            border-width : medium;
+            text-align : center;
+            width : 500px;
+        }
+    </style>
+</head>
+<body>
+    <table border="1" class="tb">
+        <tr>
+            <td><img height="100px" width="100px" src="http://warofdragons.com/images/data/npcs/glavnzloNPC.jpg" /></td>
+            <td colspan=2><h1>Bringer of Evil Calculator<br />for Evil Eyes & Skulls</h1></td>
+        </tr>
+    </table>
+    <br />
+    <table border="1" class="tb">
+        <tr>
+            <td align="right"><b>Current BOE Reputation:</b></td>
+            <td colspan="2"><input style="width:300px" type="text" id="currentrep" /></td>
+        </tr>
+        <tr>
+            <td align="right"><b>Skulls:</b></td>
+            <td><input style="width:98%" type="text" id="currentskull" /></td>
+            <td><img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/cherepkvest3.gif" /></td>
+        </tr>
+        <tr>
+            <td align="right"><b>Evil Eyes:</b></td>
+            <td><input style="width:98%" type="text" id="currentee" /></td>
+            <td><img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/glazhaosa2.gif" /></td>
+        </tr>
+    </table>
+    <br />
+    <table border="1" cellpadding="5" class="tb">
+        <tr>
+            <th align=center">Badge</th>
+            <th>Reputation<br />Needed</th>
+            <th>Evil Eyes<br />Needed</th>
+            <th>Skulls<br />Needed</th>
+        </tr>
+        <tr>
+            <td><img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalzla_grey0611.gif" /></td>
+            <td>500</td>
+            <td><div id="grayeesneeded"></div></td>
+            <td><div id="grayskullsneeded"></div></td>
+        </tr>
+        <tr>
+            <td><img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalzla_green0611.gif" /></td>
+            <td>1000</td>
+            <td><div id="greeneesneeded"></div></td>
+            <td><div id="greenskullsneeded"></div></td>
+        </tr>
+        <tr>
+            <td><img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalzla_blue0611.gif" /></td>
+            <td>2000</td>
+            <td><div id="blueeesneeded"></div></td>
+            <td><div id="blueskullsneeded"></div></td>
+        </tr>
+        <tr>
+            <td><img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalzla_fio1710.gif" /></td>
+            <td>3000</td>
+            <td><div id="purpleeesneeded"></div></td>
+            <td><div id="purpleskullsneeded"></div></td>
+        </tr>
+        <tr>
+            <td><img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/medalzla_red1812.gif" /></td>
+            <td></td>
+            <td><div id="redeesneeded"></div></td>
+            <td><div id="redskullsneeded"></div></td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>
+                <input type="button" id="savebutton" value="Save"  class="ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false"/>
+            </td>
+            <td>
+                <a target="_blank" href="http://sites.google.com/site/info4wod/reputations/boe">Bringer of Evil Page - Mentor Site</a><br />
+                <a target="_blank" href="http://warofdragons.com/info/library/50-bringers_of_evil.html">Bringer of Evil Page - War of Dragons Library</a>    
+            </td>
+        </tr>
+        <tr>
+            <td><br />Created By:&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://warofdragons.com/user_info.php?nick=DragonAxe"><b>DragonAxe</b></a></td>
+        </tr>
+    </table>
+</body>
+</html>

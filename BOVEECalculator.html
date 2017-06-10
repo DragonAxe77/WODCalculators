@@ -1,0 +1,521 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Brotherhood of Virtue Calculator</title>
+    <!-- This calculator is made by DragonAxe for the game War of Dragons.  
+         Anybody is welcome to copy and use it but please leave this line in. -->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-darkness/jquery-ui.css" type="text/css" media="all" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://files1.guildlaunch.net/guild/library/278154/jquery.cookie.js"></script>
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function() {
+            $("#currentrep").keydown(function(event) {
+                // Allow only backspace and delete
+                if (event.keyCode == 46 || event.keyCode == 8) {
+                }
+                else {
+                    // Ensure that it is a number and stop the keypress
+                    if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+                        event.preventDefault();
+                    }
+                }
+            });
+            $("#currentskull").keydown(function(event) {
+                // Allow only backspace and delete
+                if (event.keyCode == 46 || event.keyCode == 8) {
+                    // let it happen, don't do anything
+                }
+                else {
+                    // Ensure that it is a number and stop the keypress
+                    if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+                        event.preventDefault();
+                    }
+                }
+            });
+            $("#currentee").keydown(function(event) {
+                // Allow only backspace and delete
+                if (event.keyCode == 46 || event.keyCode == 8) {
+                    // let it happen, don't do anything
+                }
+                else {
+                    // Ensure that it is a number and stop the keypress
+                    if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+                        event.preventDefault();
+                    }
+                }
+            });
+            $("#currentemanation").keydown(function(event) {
+                // Allow only backspace and delete
+                if (event.keyCode == 46 || event.keyCode == 8) {
+                    // let it happen, don't do anything
+                }
+                else {
+                    // Ensure that it is a number and stop the keypress
+                    if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+                        event.preventDefault();
+                    }
+                }
+            });
+            $("#currentrep").change(function() {
+                calculateEE()
+            });
+            $("#currentskull").change(function() {
+                calculateEE()
+            });
+            $("#currentee").change(function() {
+                calculateEE()
+            });
+            $("#currentemanation").change(function() {
+                calculateEE()
+            });
+            $("#savebutton").button();
+            $("#savebutton").click(function() {
+                var currentrep = Number($("#currentrep").val());
+                var currentskulls = Number($("#currentskull").val());
+                var currentees = Number($("#currentee").val());
+                var currentemanation = Number($("#currentemanation").val());
+                $.cookie('BOVCalculatorRep', currentrep, { expires: 999 });
+                $.cookie('BOVCalculatorSkuls', currentskulls, { expires: 999 });
+                $.cookie('BOVCalculatorEEs', currentees, { expires: 999 });
+                $.cookie('BOVCalculatorEmanation', currentemanation, { expires: 999 });
+            });
+            $("#currentrep").val($.cookie('BOVCalculatorRep'));
+            $("#currentskull").val($.cookie('BOVCalculatorSkuls'));
+            $("#currentee").val($.cookie('BOVCalculatorEEs'));
+            $("#currentemanation").val($.cookie('BOVCalculatorEmanation'));
+            calculateEE();
+        });
+        function calculateEE() {
+            var currentrep = Number($("#currentrep").val());
+            var currentskulls = Number($("#currentskull").val());
+            var currentees = Number($("#currentee").val());
+            var currentemanation = Number($("#currentemanation").val());
+
+            var skull50 = Math.floor(currentskulls / 50);
+            var skull10 = Math.floor((currentskulls - (skull50 * 50)) / 10);
+            var skull1 = currentskulls - (skull50 * 50) - (skull10 * 10);
+
+            var ee10 = Math.floor(currentees / 10);
+            var ee1 = currentees - (ee10 * 10);
+
+            var emanationinHand = (skull50 * 107) + (skull10 * 21) + (skull1 * 2) + (ee10 * 310) + (ee1 * 30) + currentemanation;
+
+            //Gray Badge Calculations
+            if (currentrep >= 500) {
+                $("#grayemanationneeded").html("0");
+                $("#grayeesneeded").html("0");
+                var grayemanationneedtotal = 0;
+                var grayemanationneed = 0;
+                var grayeeneed = 0;
+                var grayskullneed = 0;
+            }
+            else {
+                var grayemanationneedtotal = (500 - currentrep) * 7;
+                if (emanationinHand > grayemanationneedtotal) {
+                    var grayemanationneed = 0;
+                }
+                else {
+                    var grayemanationneed = (500 - currentrep) * 7 - emanationinHand;
+                }
+                var grayeeneed10 = (Math.floor(parseFloat(grayemanationneed) / 310) * 10);
+                var grayemanationleft = grayemanationneed - (grayeeneed10 * 31);
+                if ((Math.floor(grayemanationleft / 30) * 30) < grayemanationleft) {
+                    var grayeeneed = grayeeneed10 + Math.floor(grayemanationleft / 30) + 1;
+                }
+                else {
+                    var grayeeneed = grayeeneed10 + Math.floor(grayemanationleft / 30);
+                }
+                $("#grayemanationneeded").html(grayemanationneed);
+                $("#grayeesneeded").html(grayeeneed);
+            }
+
+            //Green Badge Calculations
+            if (currentrep >= 1000) {
+                $("#greenemanationneeded").html("0");
+                $("#greeneesneeded").html("0");
+                var greenemanationneedtotal = 0;
+                var greenemanationneed = 0;
+                var greeneeneed = 0;
+            }
+            else {
+                if (currentrep <= 500) {
+                    var greenemanationneedtotal = 3500;
+                    if (emanationinHand >= grayemanationneedtotal) {
+                        if ((emanationinHand - grayemanationneedtotal) > greenemanationneedtotal) {
+                            var greenemanationneed = 0;
+                        }
+                        else {
+                            var greenemanationneed = 3500 - (emanationinHand - grayemanationneedtotal);
+                        }
+                    }
+                    else {
+                        var greenemanationneed = 3500;
+                    }
+                }
+                else {
+                    var greenemanationneedtotal = (1000 - currentrep) * 7;
+                    if (emanationinHand > greenemanationneedtotal) {
+                        var greenemanationneed = 0;
+                    }
+                    else {
+                        var greenemanationneed = (1000 - currentrep) * 7 - emanationinHand;
+                    }
+                }
+                var greeneeneed10 = (Math.floor(parseFloat(greenemanationneed) / 310) * 10);
+                var greenemanationleft = greenemanationneed - (greeneeneed10 * 31);
+                if ((Math.floor(greenemanationleft / 30) * 30) < greenemanationleft) {
+                    var greeneeneed = greeneeneed10 + Math.floor(greenemanationleft / 30) + 1;
+                }
+                else {
+                    var greeneeneed = greeneeneed10 + Math.floor(greenemanationleft / 30);
+                }
+                $("#greenemanationneeded").html(greenemanationneed+grayemanationneed);
+                $("#greeneesneeded").html(greeneeneed + grayeeneed);
+            }
+
+            //Blue Badge Calculations
+            if (currentrep >= 2000) {
+                $("#blueemanationneeded").html("0");
+                $("#blueeesneeded").html("0");
+                var blueemanationneedtotal = 0;
+                var blueemanationneed = 0;
+                var blueeeneed = 0;
+            }
+            else {
+                if (currentrep <= 1000) {
+                    var blueemanationneedtotal = 10000;
+                    if (emanationinHand >= (grayemanationneedtotal + greenemanationneedtotal)) {
+                        if ((emanationinHand - (grayemanationneedtotal + greenemanationneedtotal)) > blueemanationneedtotal) {
+                            var blueemanationneed = 0;
+                        }
+                        else {
+                            var blueemanationneed = 10000 - (emanationinHand - (grayemanationneedtotal + greenemanationneedtotal));
+                        }
+                    }
+                    else {
+                        var blueemanationneed = 10000;
+                    }
+                }
+                else {
+                    var blueemanationneedtotal = (2000 - currentrep) * 10;
+                    if (emanationinHand > blueemanationneedtotal) {
+                        var blueemanationneed = 0;
+                    }
+                    else {
+                        var blueemanationneed = (2000 - currentrep) * 10 - emanationinHand;
+                    }
+                }
+                var blueeeneed10 = (Math.floor(parseFloat(blueemanationneed) / 310) * 10);
+                var blueemanationleft = blueemanationneed - (blueeeneed10 * 31);
+                if ((Math.floor(blueemanationleft / 30) * 30) < blueemanationleft) {
+                    var blueeeneed = blueeeneed10 + Math.floor(blueemanationleft / 30) + 1;
+                }
+                else {
+                    var blueeeneed = blueeeneed10 + Math.floor(blueemanationleft / 30);
+                }
+                $("#blueemanationneeded").html(blueemanationneed+greenemanationneed+grayemanationneed);
+                $("#blueeesneeded").html(blueeeneed + greeneeneed + grayeeneed);
+            }
+
+            //Purple Badge Calculations
+            if (currentrep >= 3000) {
+                $("#purpleemanationneeded").html("0");
+                $("#purpleeesneeded").html("0");
+                var purpleemanationneedtotal = 0;
+                var purpleemanationneed = 0;
+                var purpleeeneed = 0;
+            }
+            else {
+                if (currentrep <= 2000) {
+                    var purpleemanationneedtotal = 13000;
+                    if (emanationinHand >= (grayemanationneedtotal + greenemanationneedtotal + blueemanationneedtotal)) {
+                        if ((emanationinHand - (grayemanationneedtotal + greenemanationneedtotal + blueemanationneedtotal)) > purpleemanationneedtotal) {
+                            var purpleemanationneed = 0;
+                        }
+                        else {
+                            var purpleemanationneed = 13000 - (emanationinHand - (grayemanationneedtotal + greenemanationneedtotal + blueemanationneedtotal));
+                        }
+                    }
+                    else {
+                        var purpleemanationneed = 13000;
+                    }
+                }
+                else {
+                    var purpleemanationneedtotal = (3000 - currentrep) * 13;
+                    if (emanationinHand > purpleemanationneedtotal) {
+                        var purpleemanationneed = 0;
+                    }
+                    else {
+                        var purpleemanationneed = (3000 - currentrep) * 13 - emanationinHand;
+                    }
+                }
+                var purpleeeneed10 = (Math.floor(parseFloat(purpleemanationneed) / 310) * 10);
+                var purpleemanationleft = purpleemanationneed - (purpleeeneed10 * 31);
+                if ((Math.floor(purpleemanationleft / 30) * 30) < purpleemanationleft) {
+                    var purpleeeneed = purpleeeneed10 + Math.floor(purpleemanationleft / 30) + 1;
+                }
+                else {
+                    var purpleeeneed = purpleeeneed10 + Math.floor(purpleemanationleft / 30);
+                }
+                $("#purpleemanationneeded").html(purpleemanationneed+blueemanationneed+greenemanationneed+grayemanationneed);
+                $("#purpleeesneeded").html(purpleeeneed + blueeeneed + greeneeneed + grayeeneed);
+            }
+
+            //Red Badge Calculations
+            if (emanationinHand > (grayemanationneedtotal + greenemanationneedtotal + blueemanationneedtotal + purpleemanationneedtotal)) {
+                var redemanationneed = 15000 - (emanationinHand - (grayemanationneedtotal + greenemanationneedtotal + blueemanationneedtotal + purpleemanationneedtotal));
+                if (redemanationneed < 0) {
+                    redemanationneed = 0;
+                }
+            }
+            else {
+                var redemanationneed = 15000;
+            }
+            var redeeneed10 = (Math.floor(parseFloat(redemanationneed) / 310) * 10);
+            var redemanationleft = redemanationneed - (redeeneed10 * 31);
+            if ((Math.floor(redemanationleft / 30) * 30) < redemanationleft) {
+                var redeeneed = redeeneed10 + Math.floor(redemanationleft / 30) + 1;
+            }
+            else {
+                var redeeneed = redeeneed10 + Math.floor(redemanationleft / 30);
+            }
+            $("#redemanationneeded").html(redemanationneed+purpleemanationneed+blueemanationneed+greenemanationneed+grayemanationneed);
+            $("#redeesneeded").html(redeeneed + purpleeeneed + blueeeneed + greeneeneed + grayeeneed);
+        }             </script>
+    <style type="text/css">
+        body
+        {
+            color: White;
+            background: Black;
+            font-family: Calibri;
+        }
+        a
+        {
+            color: White;
+            background: Black;
+            font-family: Calibri;
+        }
+        .tb
+        {
+            background-image: url('http://www.warofdragons.com/images/tbl-usi_bg.gif');
+            color: Black;
+            border-width: medium;
+            text-align: center;
+            width: 500px;
+        }
+    </style>
+</head>
+<body>
+    
+    <table border="1" class="tb">
+        <tr>
+            <td><img height="100px" width="100px" src="http://www.warofdragons.com/images/data/npcs/npcdobrohot.jpg" /></td>
+            <td colspan=2><h1>Brotherhood of Virtue<br />Calculator for Evil Eyes</h1></td>
+        </tr>
+    </table>
+    <br />
+    <table border="1" class="tb">
+        <tr>
+            <td align="right">
+                <b>Current BOV Reputation:</b>
+            </td>
+            <td colspan="2">
+                <input style="width: 300px" type="text" id="currentrep" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <b>Skulls on Hand:</b>
+            </td>
+            <td>
+                <input style="width: 98%" type="text" id="currentskull" />
+            </td>
+            <td>
+                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/cherepkvest3.gif" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <b>Evil Eyes on Hand:</b>
+            </td>
+            <td>
+                <input style="width: 98%" type="text" id="currentee" />
+            </td>
+            <td>
+                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/glazhaosa2.gif" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <b>Emanation of Good on Hand:</b>
+            </td>
+            <td>
+                <input style="width: 98%" type="text" id="currentemanation" />
+            </td>
+            <td>
+                <img height="30px" width="30px" src="http://warofdragons.com/images/data/artifacts/emonaciadobra.gif" />
+            </td>
+        </tr>
+    </table>
+    <br />
+    <table border="1" cellpadding="5" class="tb">
+        <tr>
+            <th align="center">
+                Badge
+            </th>
+            <th>
+                Reputation<br />
+                Needed
+            </th>
+            <th>
+                Total Emanation<br />
+                Needed
+            </th>
+            <th>
+                Emanation<br />
+                Left to Get
+            </th>
+            <th>
+                Evil Eyes<br />
+                Needed
+            </th>
+            <th>
+                Skulls<br />
+                Needed
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <img height="30px" width="30px" src="http://www.warofdragons.com/images/data/artifacts/medaldobra_grey0610.gif" />
+            </td>
+            <td>
+                500
+            </td>
+            <td>
+                3500
+            </td>
+            <td>
+                <div id="grayemanationneeded">
+                </div>
+            </td>
+            <td>
+                <div id="grayeesneeded">
+                </div>
+            </td>
+            <td>
+                <div id="grayskullsneeded">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img height="30px" width="30px" src="http://www.warofdragons.com/images/data/artifacts/medaldobra_green0610.gif" />
+            </td>
+            <td>
+                1000
+            </td>
+            <td>
+                3500
+            </td>
+            <td>
+                <div id="greenemanationneeded">
+                </div>
+            </td>
+            <td>
+                <div id="greeneesneeded">
+                </div>
+            </td>
+            <td>
+                <div id="greenskullsneeded">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img height="30px" width="30px" src="http://www.warofdragons.com/images/data/artifacts/medaldobra_bluey0610.gif" />
+            </td>
+            <td>
+                2000
+            </td>
+            <td>
+                10000
+            </td>
+            <td>
+                <div id="blueemanationneeded">
+                </div>
+            </td>
+            <td>
+                <div id="blueeesneeded">
+                </div>
+            </td>
+            <td>
+                <div id="blueskullsneeded">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img height="30px" width="30px" src="http://www.warofdragons.com/images/data/artifacts/medaldobra_fio1710.gif" />
+            </td>
+            <td>
+                3000
+            </td>
+            <td>
+                13000
+            </td>
+            <td>
+                <div id="purpleemanationneeded">
+                </div>
+            </td>
+            <td>
+                <div id="purpleeesneeded">
+                </div>
+            </td>
+            <td>
+                <div id="purpleskullsneeded">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img height="30px" width="30px" src="http://www.warofdragons.com/images/data/artifacts/medaldobra_red1412.gif" />
+            </td>
+            <td>
+            </td>
+            <td>
+                15000
+            </td>
+            <td>
+                <div id="redemanationneeded">
+                </div>
+            </td>
+            <td>
+                <div id="redeesneeded">
+                </div>
+            </td>
+            <td>
+                <div id="redskullsneeded">
+                </div>
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>
+                <input type="button" id="savebutton" value="Save" class="ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false"/>
+            </td>
+            <td>
+                <a target="_blank" href="http://sites.google.com/site/info4wod/reputations/bov">Brotherhood of Virtue Page - Mentor Site</a><br />
+                <a target="_blank" href="http://www.warofdragons.com/info/library/60-brotherhood_of_virtue.html">Brotherhood of Virtue Page - War of Dragons Library</a>    
+            </td>
+        </tr>
+        <tr>
+            <td><br />Created By:&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://warofdragons.com/user_info.php?nick=DragonAxe"><b>DragonAxe</b></a></td>
+        </tr>
+    </table>
+    <br />
+    <br />
+    <br />
+</body>
+</html>

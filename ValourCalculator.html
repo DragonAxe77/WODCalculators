@@ -1,0 +1,461 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Valour Calculator</title>
+    <!-- This calculator is made by DragonAxe for the game War of Dragons.  
+         Anybody is welcome to copy and use it but please leave this line in. -->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-darkness/jquery-ui.css" type="text/css" media="all" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://files1.guildlaunch.net/guild/library/278154/jquery.cookie.js"></script>
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function() {
+            initialize();
+        });
+        function initialize() {
+            $("#currentvalour").keydown(function(event) {
+                // Allow only backspace and delete
+                if (event.keyCode == 46 || event.keyCode == 8) {
+                }
+                else {
+                    // Ensure that it is a number and stop the keypress
+                    if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
+                        event.preventDefault();
+                    }
+                }
+            });
+            $("#currentvalour").change(function() {
+                calculateValour();
+            });
+            $("#Radio1").click(function() {
+                calculateValour();
+            });
+            $("#Radio2").click(function() {
+                calculateValour();
+            });
+            $("#Radio3").click(function() {
+                calculateValour();
+            });
+            $("#Radio4").click(function() {
+                calculateValour();
+            });
+            $("#Radio5").click(function() {
+                calculateValour();
+            });
+            $("#Radio6").click(function() {
+                calculateValour();
+            });
+            $("#Radio7").click(function() {
+                calculateValour();
+            });
+            $("#Radio8").click(function() {
+                calculateValour();
+            });
+            $("#Radio9").click(function() {
+                calculateValour();
+            });
+            $("#Radio10").click(function() {
+                calculateValour();
+            });
+            $("#Radio11").click(function() {
+                calculateValour();
+            });
+            $("#Radio12").click(function() {
+                calculateValour();
+            });
+            $("#Radio13").click(function() {
+                calculateValour();
+            });
+            $("#Radio14").click(function() {
+                calculateValour();
+            });
+            $("#Radio15").click(function() {
+                calculateValour();
+            });
+            $("#savebutton").button();
+            $("#savebutton").click(function() {
+                var currentvalour = Number($("#currentvalour").val());
+                var currentrank = $("input:radio[name=radio]:checked").attr("id");
+                $.cookie('ValourCalculatorCurrentValour', currentvalour, { expires: 999 });
+                $.cookie('ValourCalculatorCurrentRank', currentrank, { expires: 999 });
+            });
+            $("#currentvalour").val($.cookie('ValourCalculatorCurrentValour'));
+            $("#" + $.cookie('ValourCalculatorCurrentRank')).attr('checked', 'checked');
+            calculateValour();
+        }
+
+        function calculateValour() {
+
+            var currentvalour = Number($("#currentvalour").val());
+            var level = $("input:radio[name=radio]:checked").attr("id").substring(5);
+
+            if (level == 1) {
+                $("#Div2").html(numberWithCommas(8000 - currentvalour));
+                $("#Div17").html((currentvalour / 8000 * 100).toString().substring(0, 5) + "% / " + (100 - (currentvalour / 8000 * 100)).toString().substring(0, 5) + "%");
+            }
+
+            if (level > 2) {
+                $("#Div2").html("-");
+                $("#Div17").html("100% / 0%");
+            } else if (level < 2) {
+                $("#Div3").html(numberWithCommas(30000));
+                $("#Div18").html("0% / 100%");
+            } else {
+                $("#Div2").html("-");
+                $("#Div17").html("100% / 0%");
+                $("#Div3").html(numberWithCommas(30000 - currentvalour));
+                $("#Div18").html((currentvalour / 30000 * 100).toString().substring(0, 5) + "% / " + (100 - (currentvalour / 30000 * 100)).toString().substring(0, 5) + "%");
+            }
+
+            if ((level > 3) || (currentvalour >= 30000)) {
+                $("#Div3").html("-");
+                $("#Div18").html("100% / 0%");
+            } else if (level < 3) {
+                $("#Div4").html(numberWithCommas(114000));
+                $("#Div19").html("0% / 100%");
+            } else {
+                $("#Div3").html("-");
+                $("#Div18").html("100% / 0%");
+                $("#Div4").html(numberWithCommas(114000 - currentvalour));
+                $("#Div19").html((currentvalour / 114000 * 100).toString().substring(0, 5) + "% / " + (100 - (currentvalour / 114000 * 100)).toString().substring(0, 5) + "%");
+            }
+
+            if ((level > 4) || (currentvalour >= 114000)) {
+                $("#Div4").html("-");
+                $("#Div19").html("100% / 0%");
+            } else if (level < 4) {
+                $("#Div5").html(numberWithCommas(396000));
+                $("#Div20").html("0% / 100%");
+            } else {
+                $("#Div4").html("-");
+                $("#Div19").html("100% / 0%");
+                $("#Div5").html(numberWithCommas(396000 - currentvalour));
+                $("#Div20").html((currentvalour / 396000 * 100).toString().substring(0, 5) + "% / " + (100 - (currentvalour / 396000 * 100)).toString().substring(0, 5) + "%");
+            }
+
+            if ((level > 5) || (currentvalour >= 396000)) {
+                $("#Div5").html("-");
+                $("#Div20").html("100% / 0%");
+            } else if (level < 5) {
+                $("#Div6").html(numberWithCommas(300000));
+                $("#Div21").html("0% / 100%");
+            } else {
+                $("#Div5").html("-");
+                $("#Div20").html("100% / 0%");
+                $("#Div6").html(numberWithCommas(300000 - currentvalour));
+                $("#Div21").html((currentvalour / 300000 * 100).toString().substring(0, 5) + "% / " + (100 - (currentvalour / 300000 * 100)).toString().substring(0, 5) + "%");
+            }
+
+            if ((level > 6) || (currentvalour >= 300000)) {
+                $("#Div6").html("-");
+                $("#Div21").html("100% / 0%");
+            } else if (level < 6) {
+                $("#Div7").html(numberWithCommas(400000));
+                $("#Div22").html("0% / 100%");
+            } else {
+                $("#Div6").html("-");
+                $("#Div21").html("100% / 0%");
+                $("#Div7").html(numberWithCommas(400000 - currentvalour));
+                $("#Div22").html((currentvalour / 400000 * 100).toString().substring(0, 5) + "% / " + (100 - (currentvalour / 400000 * 100)).toString().substring(0, 5) + "%");
+            }
+
+            if ((level > 7) || (currentvalour >= 400000)) {
+                $("#Div7").html("-");
+                $("#Div22").html("100% / 0%");
+            } else if (level < 7) {
+                $("#Div8").html(numberWithCommas(500000));
+                $("#Div23").html("0% / 100%");
+            } else {
+                $("#Div7").html("-");
+                $("#Div22").html("100% / 0%");
+                $("#Div8").html(numberWithCommas(500000 - currentvalour));
+                $("#Div23").html((currentvalour / 500000 * 100).toString().substring(0, 5) + "% / " + (100 - (currentvalour / 500000 * 100)).toString().substring(0, 5) + "%");
+            }
+
+            if ((level > 8) || (currentvalour >= 500000)) {
+                $("#Div8").html("-");
+                $("#Div23").html("100% / 0%");
+            } else if (level < 8) {
+                $("#Div9").html(numberWithCommas(600000));
+                $("#Div24").html("0% / 100%");
+            } else {
+                $("#Div8").html("-");
+                $("#Div23").html("100% / 0%");
+                $("#Div9").html(numberWithCommas(600000 - currentvalour));
+                $("#Div24").html((currentvalour / 600000 * 100).toString().substring(0, 5) + "% / " + (100 - (currentvalour / 600000 * 100)).toString().substring(0, 5) + "%");
+            }
+
+            if ((level > 9) || (currentvalour >= 600000)) {
+                $("#Div9").html("-");
+                $("#Div24").html("100% / 0%");
+            } else if (level < 9) {
+                $("#Div10").html(numberWithCommas(700000));
+                $("#Div25").html("0% / 100%");
+            } else {
+                $("#Div9").html("-");
+                $("#Div24").html("100% / 0%");
+                $("#Div10").html(numberWithCommas(700000 - currentvalour));
+                $("#Div25").html((currentvalour / 700000 * 100).toString().substring(0, 5) + "% / " + (100 - (currentvalour / 700000 * 100)).toString().substring(0, 5) + "%");
+            }
+
+            if ((level > 10) || (currentvalour >= 700000)) {
+                $("#Div10").html("-");
+                $("#Div25").html("100% / 0%");
+            } else if (level < 10) {
+                $("#Div11").html(numberWithCommas(800000));
+                $("#Div26").html("0% / 100%");
+            } else {
+                $("#Div10").html("-");
+                $("#Div25").html("100% / 0%");
+                $("#Div11").html(numberWithCommas(800000 - currentvalour));
+                $("#Div26").html((currentvalour / 800000 * 100).toString().substring(0, 5) + "% / " + (100 - (currentvalour / 800000 * 100)).toString().substring(0, 5) + "%");
+            }
+
+            if ((level > 11) || (currentvalour >= 800000)) {
+                $("#Div11").html("-");
+                $("#Div26").html("100% / 0%");
+            } else if (level < 11) {
+                $("#Div12").html(numberWithCommas(1200000));
+                $("#Div27").html("0% / 100%");
+            } else {
+                $("#Div11").html("-");
+                $("#Div26").html("100% / 0%");
+                $("#Div12").html(numberWithCommas(1200000 - currentvalour));
+                $("#Div27").html((currentvalour / 1200000 * 100).toString().substring(0, 5) + "% / " + (100 - (currentvalour / 1200000 * 100)).toString().substring(0, 5) + "%");
+            }
+
+            if ((level > 12) || (currentvalour >= 1200000)) {
+                $("#Div12").html("-");
+                $("#Div27").html("100% / 0%");
+            } else if (level < 12) {
+                $("#Div13").html(numberWithCommas(1800000));
+                $("#Div28").html("0% / 100%");
+            } else {
+                $("#Div12").html("-");
+                $("#Div27").html("100% / 0%");
+                $("#Div13").html(numberWithCommas(1800000 - currentvalour));
+                $("#Div28").html((currentvalour / 1800000 * 100).toString().substring(0, 5) + "% / " + (100 - (currentvalour / 1800000 * 100)).toString().substring(0, 5) + "%");
+            }
+
+            if ((level > 13) || (currentvalour >= 1800000)) {
+                $("#Div13").html("-");
+                $("#Div28").html("100% / 0%");
+            } else if (level < 13) {
+                $("#Div14").html(numberWithCommas(2000000));
+                $("#Div29").html("0% / 100%");
+            } else {
+                $("#Div13").html("-");
+                $("#Div28").html("100% / 0%");
+                $("#Div14").html(numberWithCommas(2000000 - currentvalour));
+                $("#Div29").html((currentvalour / 2000000 * 100).toString().substring(0, 5) + "% / " + (100 - (currentvalour / 2000000 * 100)).toString().substring(0, 5) + "%");
+            }
+
+            if ((level > 14) || (currentvalour >= 2000000)) {
+                $("#Div14").html("-");
+                $("#Div29").html("100% / 0%");
+            } else if (level < 14) {
+                $("#Div15").html(numberWithCommas(2400000));
+                $("#Div30").html("0% / 100%");
+            } else {
+                $("#Div14").html("-");
+                $("#Div29").html("100% / 0%");
+                $("#Div15").html(numberWithCommas(2400000 - currentvalour));
+                $("#Div30").html((currentvalour / 2400000 * 100).toString().substring(0, 5) + "% / " + (100 - (currentvalour / 2400000 * 100)).toString().substring(0, 5) + "%");
+            }
+
+            if (level == 15) {
+                $("#Div15").html("-");
+                $("#Div30").html("100% / 0%");
+            } else if (level < 14) {
+            } else {
+            }
+        }
+
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+    </script>
+    <style type="text/css">
+        body 
+        {
+            color : White;
+            background : Black;
+            font-family : Calibri;
+            font-size: 10pt;
+        }
+        a 
+        {
+            color : White;
+            background : Black;
+            font-family : Calibri;
+        }
+        .tb
+        {
+            background-image : url('http://www.warofdragons.com/images/tbl-usi_bg.gif');
+            color : Black;
+            border-width : medium;
+            text-align : center;
+            width : 830px;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td align="center">
+                <table border="1" class="tb">
+                    <tbody>
+                        <tr>
+                            <td><h1>Valour Calculator</h1></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <table border="1" class="tb">
+                    <tbody>
+                        <tr>
+                            <td align="right"><b>Current Valour:</b></td>
+                            <td colspan="2"><input style="width:400px" type="text" id="currentvalour"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table border="1" cellpadding="5" class="tb">
+                    <tbody>
+                        <tr>
+                            <td width="100px" style="font-weight:bolder; font-size:larger; color:White; background-color:#222222">Current Rank</td>
+                            <td width="150px" style="font-weight:bolder; font-size:larger; color:White; background-color:#222222">Rank</td>
+                            <td width="150px" style="font-weight:bolder; font-size:larger; color:White; background-color:#222222">Valour Needed</td>
+                            <td width="100px" style="font-weight:bolder; font-size:larger; color:White; background-color:#222222">Level Needed</td>
+                            <td style="font-weight:bolder; font-size:larger; color:White; background-color:#222222">% Complete / % Left</td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" id="Radio1" name="radio"/></td>
+                            <td align=left>&nbsp;&nbsp;<img height="15px" width="15px" src="http://warofdragons.de/images/ranks/rank0.gif">&nbsp;&nbsp;Recruit</td>
+                            <td><div id="Div1">-</div></td>
+                            <td>-</td>
+                            <td><div id="Div16">- / -</div></td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" id="Radio2" name="radio"/></td>
+                            <td align=left>&nbsp;&nbsp;<img height="15px" width="15px" src="http://warofdragons.de/images/ranks/rank1.gif">&nbsp;&nbsp;Soldier</td>
+                            <td><div id="Div2">8,000</div></td>
+                            <td>-</td>
+                            <td><div id="Div17">0% / 100%</div></td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" id="Radio3" name="radio"/></td>
+                            <td align=left>&nbsp;&nbsp;<img height="15px" width="15px" src="http://warofdragons.de/images/ranks/rank2.gif">&nbsp;&nbsp;Fighter</td>
+                            <td><div id="Div3">30,000</div></td>
+                            <td>-</td>
+                            <td><div id="Div18">0% / 100%</div></td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" id="Radio4" name="radio"/></td>
+                            <td align=left>&nbsp;&nbsp;<img height="15px" width="15px" src="http://warofdragons.de/images/ranks/rank3.gif">&nbsp;&nbsp;Warrior</td>
+                            <td><div id="Div4">114,000</div></td>
+                            <td>-</td>
+                            <td><div id="Div19">0% / 100%</div></td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" id="Radio5" name="radio"/></td>
+                            <td align=left>&nbsp;&nbsp;<img height="15px" width="15px" src="http://warofdragons.de/images/ranks/rank4.gif">&nbsp;&nbsp;Elite Warrior</td>
+                            <td><div id="Div5">396,000</div></td>
+                            <td>-</td>
+                            <td><div id="Div20">0% / 100%</div></td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" id="Radio6" name="radio"/></td>
+                            <td align=left>&nbsp;&nbsp;<img height="15px" width="15px" src="http://warofdragons.de/images/ranks/rank5.gif">&nbsp;&nbsp;Champion</td>
+                            <td><div id="Div6">300,000</div></td>
+                            <td>4</td>
+                            <td><div id="Div21">0% / 100%</div></td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" id="Radio7" name="radio"/></td>
+                            <td align=left>&nbsp;&nbsp;<img height="15px" width="15px" src="http://warofdragons.de/images/ranks/rank6.gif">&nbsp;&nbsp;Gladiator</td>
+                            <td><div id="Div7">400,000</div></td>
+                            <td>6</td>
+                            <td><div id="Div22">0% / 100%</div></td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" id="Radio8" name="radio"/></td>
+                            <td align=left>&nbsp;&nbsp;<img height="15px" width="15px" src="http://warofdragons.de/images/ranks/rank7.gif">&nbsp;&nbsp;Captain</td>
+                            <td><div id="Div8">500,000</div></td>
+                            <td>7</td>
+                            <td><div id="Div23">0% / 100%</div></td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" id="Radio9" name="radio"/></td>
+                            <td align=left>&nbsp;&nbsp;<img height="15px" width="15px" src="http://warofdragons.de/images/ranks/rank8.gif">&nbsp;&nbsp;War Master</td>
+                            <td><div id="Div9">600,000</div></td>
+                            <td>8</td>
+                            <td><div id="Div24">0% / 100%</div></td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" id="Radio10" name="radio"/></td>
+                            <td align=left>&nbsp;&nbsp;<img height="15px" width="15px" src="http://warofdragons.de/images/ranks/rank9.gif">&nbsp;&nbsp;Hero</td>
+                            <td><div id="Div10">700,000</div></td>
+                            <td>9</td>
+                            <td><div id="Div25">0% / 100%</div></td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" id="Radio11" name="radio"/></td>
+                            <td align=left>&nbsp;&nbsp;<img height="15px" width="15px" src="http://warofdragons.de/images/ranks/rank10.gif">&nbsp;&nbsp;War Expert</td>
+                            <td><div id="Div11">800,000</div></td>
+                            <td>10</td>
+                            <td><div id="Div26">0% / 100%</div></td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" id="Radio12" name="radio"/></td>
+                            <td align=left>&nbsp;&nbsp;<img height="15px" width="15px" src="http://warofdragons.de/images/ranks/rank11.gif">&nbsp;&nbsp;War Grandmaster</td>
+                            <td><div id="Div12">1,200,000</div></td>
+                            <td>11</td>
+                            <td><div id="Div27">0% / 100%</div></td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" id="Radio13" name="radio"/></td>
+                            <td align=left>&nbsp;&nbsp;<img height="15px" width="15px" src="http://warofdragons.de/images/ranks/rank12.gif">&nbsp;&nbsp;Marshal</td>
+                            <td><div id="Div13">1,800,000</div></td>
+                            <td>12</td>
+                            <td><div id="Div28">0% / 100%</div></td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" id="Radio14" name="radio"/></td>
+                            <td align=left>&nbsp;&nbsp;<img height="15px" width="15px" src="http://warofdragons.de/images/ranks/rank13.gif">&nbsp;&nbsp;High Master</td>
+                            <td><div id="Div14">2,000,000</div></td>
+                            <td>13</td>
+                            <td><div id="Div29">0% / 100%</div></td>
+                        </tr>
+                        <tr>
+                            <td><input type="radio" id="Radio15" name="radio"/></td>
+                            <td align=left>&nbsp;&nbsp;<img height="15px" width="15px" src="http://warofdragons.de/images/ranks/rank14.gif">&nbsp;&nbsp;Lord</td>
+                            <td><div id="Div15">2,400,000</div></td>
+                            <td>14</td>
+                            <td><div id="Div30">0% / 100%</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>
+                <input type="button" id="savebutton" value="Save" class="ui-button ui-widget ui-state-default ui-corner-all" role="button" aria-disabled="false">
+            </td>
+            <td>
+                <a target="_blank" href="https://sites.google.com/site/info4wod/reputations/goddess">Goddess Aladeya Page - Mentor Site</a><br>
+                <a target="_blank" href="http://www.warofdragons.com/info/library/index.php?obj=cat&id=108">Goddess Aladeya Page - War of Dragons Site</a><br>
+            </td>
+        </tr>
+        <tr>
+            <td><br />Created By:&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://warofdragons.com/user_info.php?nick=DragonAxe"><b>DragonAxe</b></a></td>
+        </tr>
+    </table>
+</body></html>
