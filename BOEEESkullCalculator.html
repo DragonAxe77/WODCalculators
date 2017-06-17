@@ -5,9 +5,9 @@
     <!-- This calculator is made by DragonAxe for the game War of Dragons.  
          Anybody is welcome to copy and use it but please leave this line in. -->
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-darkness/jquery-ui.css" type="text/css" media="all" />
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="http://files1.guildlaunch.net/guild/library/278154/jquery.cookie.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>	
+    <script type="text/javascript" src="https://cdn.rawgit.com/DragonAxe77/WODCalculators/6d323fd4bc7c65a8d31d4a7390c23e2f82620562/js.cookie.js"></script>
     <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             $("#currentrep").keydown(function(event) {
@@ -59,13 +59,13 @@
                 var currentrep = Number($("#currentrep").val());
                 var currentskulls = Number($("#currentskull").val());
                 var currentees = Number($("#currentee").val());
-                $.cookie('BOECalculatorRep', currentrep, { expires: 999 });
-                $.cookie('BOECalculatorSkuls', currentskulls, { expires: 999 });
-                $.cookie('BOECalculatorEEs', currentees, { expires: 999 });
+                Cookies.set('BOECalculatorRep', currentrep);
+                Cookies.set('BOECalculatorSkuls', currentskulls);
+                Cookies.set('BOECalculatorEEs', currentees);
             });
-            $("#currentrep").val($.cookie('BOECalculatorRep'));
-            $("#currentskull").val($.cookie('BOECalculatorSkuls'));
-            $("#currentee").val($.cookie('BOECalculatorEEs'));
+            $("#currentrep").val(Cookies('BOECalculatorRep'));
+            $("#currentskull").val(Cookies('BOECalculatorSkuls'));
+            $("#currentee").val(Cookies('BOECalculatorEEs'));
             calculateEE();
         });
         function calculateEE() {
